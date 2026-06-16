@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f5f9f">
-  <meta name="description" content="RICE NAVI：炊飯ナレッジDBをスマホで検索・学習・トラブル診断できる軽量PWA。">
+  <meta name="theme-color" content="#0b4f8a">
+  <meta name="description" content="RICE NAVI：症状から原因・確認項目・試験例を引ける炊飯トラブル解決アプリ。">
   <title>RICE NAVI</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -12,126 +12,76 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="app-header">
-    <div>
-      <p class="eyebrow">Rice Knowledge Navigator</p>
-      <h1>RICE NAVI</h1>
+  <header class="top">
+    <div class="brand">
+      <div class="mark">RN</div>
+      <div>
+        <p class="eyebrow">Rice Trouble Navigator</p>
+        <h1>RICE NAVI</h1>
+        <p class="sub">炊飯トラブル解決アプリ</p>
+      </div>
     </div>
     <button id="installBtn" class="ghost small" hidden>インストール</button>
   </header>
 
-  <nav class="tabs" aria-label="主要メニュー">
-    <button class="tab active" data-tab="today">今日</button>
-    <button class="tab" data-tab="knowledge">知識</button>
-    <button class="tab" data-tab="diagnosis">診断</button>
-    <button class="tab" data-tab="sources">出典</button>
-    <button class="tab" data-tab="info">情報</button>
-  </nav>
-
   <main>
-    <section id="today" class="panel active">
-      <div class="hero-card">
-        <p class="eyebrow">今日の1枚</p>
-        <h2 id="dailyTitle">読み込み中</h2>
-        <p id="dailyText"></p>
-        <div id="dailyMeta" class="meta-row"></div>
-        <div class="actions">
-          <button id="openDaily" class="primary">詳細を見る</button>
-          <button id="nextDaily" class="ghost">別のカード</button>
-        </div>
+    <section class="hero">
+      <h2>症状から、原因と確認項目をすぐ見る</h2>
+      <p>硬い・芯残り・べたつき・焦げ・水鍋・冷却遅れなど、現場で起きる炊飯トラブルを40件に整理しています。</p>
+      <div class="searchBox">
+        <input id="q" type="search" placeholder="例：硬い、芯、べたつき、水鍋、冷蔵後、センサー" autocomplete="off">
+        <button id="clearBtn" class="ghost">クリア</button>
       </div>
-      <div class="two-col">
-        <section class="mini-card">
-          <h3>すぐ使う</h3>
-          <button class="wide jump" data-tab-target="diagnosis">症状から診断する</button>
-          <button class="wide jump" data-tab-target="knowledge">キーワードで探す</button>
-        </section>
-        <section class="mini-card">
-          <h3>データ</h3>
-          <p id="dbStats" class="muted"></p>
-          <p class="muted">Excelを差し替えるだけで、同じ構造のデータに更新できます。</p>
-        </section>
-      </div>
+      <div id="quickChips" class="chips"></div>
     </section>
 
-    <section id="knowledge" class="panel">
-      <div class="toolbar">
-        <input id="q" type="search" placeholder="例：浸漬、pH、焦げ、硬い、ほぐれ" autocomplete="off">
-        <button id="clearSearch" class="ghost">クリア</button>
-      </div>
+    <nav class="tabs" aria-label="表示切替">
+      <button class="tab active" data-view="all">症状から探す</button>
+      <button class="tab" data-view="urgent">最重要</button>
+      <button class="tab" data-view="saved">保存</button>
+      <button class="tab" data-view="info">情報</button>
+    </nav>
+
+    <section id="finder" class="panel active">
       <div class="filters">
-        <select id="countryFilter" aria-label="国">
-          <option value="">国：すべて</option>
+        <select id="groupFilter" aria-label="分類">
+          <option value="">分類：すべて</option>
         </select>
-        <select id="majorFilter" aria-label="大分類">
-          <option value="">大分類：すべて</option>
-        </select>
-        <select id="priorityFilter" aria-label="優先度">
-          <option value="">優先度：すべて</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
+        <select id="priorityFilter" aria-label="緊急度">
+          <option value="">緊急度：すべて</option>
+          <option value="最重要">最重要</option>
           <option value="高">高</option>
           <option value="中〜高">中〜高</option>
           <option value="中">中</option>
         </select>
-        <select id="bookmarkFilter" aria-label="保存">
-          <option value="">保存：すべて</option>
-          <option value="only">保存のみ</option>
-        </select>
       </div>
-      <div id="categoryChips" class="chips"></div>
-      <div class="result-head">
-        <span id="resultCount"></span>
-        <button id="showMore" class="ghost small" hidden>もっと表示</button>
-      </div>
-      <div id="knowledgeList" class="card-list"></div>
-    </section>
-
-    <section id="diagnosis" class="panel">
-      <div class="toolbar">
-        <input id="dq" type="search" placeholder="症状を入力：硬い、芯、べたつき、焦げ、腐敗など" autocomplete="off">
-        <button id="clearDiag" class="ghost">クリア</button>
-      </div>
-      <div id="symptomChips" class="chips compact"></div>
-      <div id="diagnosisList" class="card-list"></div>
-    </section>
-
-    <section id="sources" class="panel">
-      <div class="toolbar">
-        <input id="sq" type="search" placeholder="出典を検索：J-STAGE、Bacillus、pHなど" autocomplete="off">
-        <button id="clearSource" class="ghost">クリア</button>
-      </div>
-      <div id="sourceList" class="card-list"></div>
+      <div class="resultLine"><span id="resultCount"></span><span id="modeLabel"></span></div>
+      <div id="list" class="list"></div>
     </section>
 
     <section id="info" class="panel">
-      <article class="mini-card">
-        <h2>このアプリについて</h2>
-        <p>RICE NAVIは、炊飯ナレッジDBをスマホで検索しやすくした軽量Webアプリです。データは端末内で表示され、サーバー処理や外部AI処理は使っていません。</p>
-        <dl class="info-grid">
-          <dt>知識DB</dt><dd id="infoKnowledge"></dd>
-          <dt>トラブル診断</dt><dd id="infoDiagnosis"></dd>
-          <dt>出典DB</dt><dd id="infoSources"></dd>
-          <dt>更新元</dt><dd id="infoWorkbook"></dd>
+      <article class="infoCard">
+        <h2>この版の考え方</h2>
+        <p>このアプリは「炊飯知識を読むアプリ」ではなく、<strong>トラブル発生時に見るアプリ</strong>です。最初に症状を選び、原因候補、確認項目、試験例、やってはいけないことを確認します。</p>
+        <dl class="infoGrid">
+          <dt>診断件数</dt><dd id="statDiag"></dd>
+          <dt>補助ナレッジ</dt><dd id="statKnow"></dd>
+          <dt>出典</dt><dd id="statSrc"></dd>
+          <dt>元Excel</dt><dd id="statBook"></dd>
         </dl>
       </article>
-      <article class="mini-card">
-        <h3>運用方法</h3>
-        <p>GitHub Pagesにこのフォルダをそのままアップロードすると公開できます。Excelを更新した場合は、data.jsを作り直す方式です。</p>
-        <p>初回表示後は、対応ブラウザではオフライン表示用にファイルをキャッシュします。</p>
-      </article>
-      <article class="mini-card danger">
+      <article class="infoCard warn">
         <h3>注意</h3>
-        <p>このアプリは現場確認を助けるナレッジ表示ツールです。食品安全、期限設定、法令判断は必ず社内基準・公式資料・実測結果で確認してください。</p>
+        <p>食品安全・法令・期限設定は、このアプリだけで判断しないでください。社内基準、公式資料、温度・重量・pHなどの実測記録で確認してください。</p>
       </article>
     </section>
   </main>
 
   <div id="drawer" class="drawer" aria-hidden="true">
-    <div class="drawer-backdrop" data-close></div>
-    <article class="drawer-card" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="shade" data-close></div>
+    <article class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
       <button class="close" data-close aria-label="閉じる">×</button>
-      <div id="drawerContent"></div>
+      <div id="detail"></div>
     </article>
   </div>
 

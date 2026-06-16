@@ -1,17 +1,13 @@
 {
   "name": "RICE NAVI",
   "short_name": "RICE NAVI",
+  "description": "症状から原因・確認項目・試験例を引ける炊飯トラブル解決アプリ。",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f8fb",
-  "theme_color": "#0f5f9f",
+  "background_color": "#f4f8fb",
+  "theme_color": "#0b4f8a",
   "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
     {
       "src": "icon-192.png",
       "sizes": "192x192",
@@ -22,7 +18,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "lang": "ja",
-  "description": "炊飯ナレッジDBをスマホで検索・学習・トラブル診断できる軽量PWA。"
+  ]
 }
