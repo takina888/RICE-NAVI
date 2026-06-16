@@ -20,7 +20,8 @@ function init(){
   DATA.meta.groups.forEach(g => { const opt=document.createElement('option'); opt.value=g; opt.textContent='分類：'+g; $('groupFilter').appendChild(opt); });
   $('quickChips').innerHTML = DATA.meta.quickSymptoms.map(x=>`<button class="chip" data-chip="${esc(x)}">${esc(x)}</button>`).join('');
   $('statDiag').textContent = DATA.meta.diagnosisCount + '件';
-  $('statKnow').textContent = DATA.meta.knowledgeCount + '件（全件格納）';
+  $('statKnow').textContent = DATA.meta.knowledgeCount + '件（整理後） / 元 ' + DATA.meta.rawKnowledgeCount + '件';
+  if($('statClean')) $('statClean').textContent = '管理系 ' + DATA.meta.excludedKeywordCount + '件、重複 ' + DATA.meta.duplicateRemovedCount + '件';
   if($('statLinkedKnow')) $('statLinkedKnow').textContent = DATA.meta.linkedKnowledgeCount + '件（診断詳細に直接表示）';
   $('statSrc').textContent = DATA.meta.sourceCount + '件（全件格納）';
   if($('statLinkedSrc')) $('statLinkedSrc').textContent = DATA.meta.linkedSourceCount + '件（診断に直接ひもづく出典）';

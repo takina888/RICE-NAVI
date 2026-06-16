@@ -27,7 +27,7 @@
   <main>
     <section class="hero">
       <h2>症状から、原因と確認項目をすぐ見る</h2>
-      <p>硬い・芯残り・べたつき・焦げ・水鍋・冷却遅れなど、現場で起きる炊飯トラブルを<span id="diagCountText">31件</span>に整理し、知識DB <span id="knowCountText">839件</span> も検索できます。</p>
+      <p>硬い・芯残り・べたつき・焦げ・水鍋・冷却遅れなど、現場で起きる炊飯トラブルを<span id="diagCountText">31件</span>に整理しています。</p>
       <div class="searchBox">
         <input id="q" type="search" placeholder="例：硬い、芯、べたつき、水鍋、冷蔵後、センサー" autocomplete="off">
         <button id="clearBtn" class="ghost">クリア</button>
@@ -63,13 +63,14 @@
     <section id="info" class="panel">
       <article class="infoCard">
         <h2>この版の考え方</h2>
-        <p>このアプリは<strong>トラブル発生時に見るアプリ</strong>です。最初に症状を選び、原因候補、確認項目、試験例、やってはいけないことを確認します。知識DBは全件格納し、必要なときに「ナレッジ検索」から確認できます。</p>
+        <p>このアプリは、<strong>トラブル発生時に原因・確認項目・試験例を見るためのアプリ</strong>です。最初に症状を選び、原因候補、確認項目、試験例、やってはいけないことを確認します。</p>
         <dl class="infoGrid">
           <dt>診断件数</dt><dd id="statDiag"></dd>
-          <dt>知識DB</dt><dd id="statKnow"></dd>
-          <dt>診断直結ナレッジ</dt><dd id="statLinkedKnow"></dd>
-          <dt>出典DB</dt><dd id="statSrc"></dd>
-          <dt>診断直結出典</dt><dd id="statLinkedSrc"></dd>
+          <dt>補助ナレッジ</dt><dd id="statKnow"></dd>
+          <dt>除外</dt><dd id="statClean"></dd>
+          <dt>診断関連ナレッジ</dt><dd id="statLinkedKnow"></dd>
+          <dt>出典</dt><dd id="statSrc"></dd>
+          <dt>診断関連出典</dt><dd id="statLinkedSrc"></dd>
           <dt>元Excel</dt><dd id="statBook"></dd>
           <dt>版</dt><dd id="appVersion"></dd>
         </dl>
