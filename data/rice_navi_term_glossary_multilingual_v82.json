@@ -1,0 +1,302 @@
+[
+  {
+    "term_ja": "べたつき",
+    "term_en": "surface stickiness",
+    "term_zh_tw": "表面過黏／黏濕",
+    "term_zh_cn": "表面过黏／黏湿",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "付着性",
+    "term_en": "adhesiveness",
+    "term_zh_tw": "附著性",
+    "term_zh_cn": "附着性",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "付着水",
+    "term_en": "adhering water",
+    "term_zh_tw": "附著水",
+    "term_zh_cn": "附着水",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "保温",
+    "term_en": "hot holding",
+    "term_zh_tw": "保溫",
+    "term_zh_cn": "保温",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "冷飯",
+    "term_en": "cooled rice",
+    "term_zh_tw": "冷飯",
+    "term_zh_cn": "冷饭",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "加水",
+    "term_en": "water addition",
+    "term_zh_tw": "加水",
+    "term_zh_cn": "加水",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "加水倍率",
+    "term_en": "water ratio",
+    "term_zh_tw": "加水倍率",
+    "term_zh_cn": "加水倍率",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "吸水",
+    "term_en": "water absorption",
+    "term_zh_tw": "吸水",
+    "term_zh_cn": "吸水",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "官能評価",
+    "term_en": "sensory evaluation",
+    "term_zh_tw": "感官評價",
+    "term_zh_cn": "感官评价",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "昇温",
+    "term_en": "heating-up phase",
+    "term_zh_tw": "升溫",
+    "term_zh_cn": "升温",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "水分分布",
+    "term_en": "moisture distribution",
+    "term_zh_tw": "水分分布",
+    "term_zh_cn": "水分分布",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "沸騰",
+    "term_en": "boiling",
+    "term_zh_tw": "沸騰",
+    "term_zh_cn": "沸腾",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "洗米後重量",
+    "term_en": "washed-rice weight",
+    "term_zh_tw": "洗米後重量",
+    "term_zh_cn": "洗米后重量",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "浸漬",
+    "term_en": "soaking",
+    "term_zh_tw": "浸泡",
+    "term_zh_cn": "浸泡",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "温度履歴",
+    "term_en": "temperature history",
+    "term_zh_tw": "溫度歷程",
+    "term_zh_cn": "温度历程",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "炊き上がり重量",
+    "term_en": "cooked weight",
+    "term_zh_tw": "炊飯後重量",
+    "term_zh_cn": "米饭熟后重量",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "炊飯",
+    "term_en": "rice cooking",
+    "term_zh_tw": "炊飯",
+    "term_zh_cn": "米饭加工",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "炊飯工程",
+    "term_en": "rice-cooking process",
+    "term_zh_tw": "炊飯工程",
+    "term_zh_cn": "米饭加工工序",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "物性",
+    "term_en": "texture properties",
+    "term_zh_tw": "物性",
+    "term_zh_cn": "物性",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "硬さ",
+    "term_en": "hardness",
+    "term_zh_tw": "硬度",
+    "term_zh_cn": "硬度",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "硬さ・粘り・付着性",
+    "term_en": "hardness, stickiness, and adhesiveness",
+    "term_zh_tw": "硬度、黏性、附著性",
+    "term_zh_cn": "硬度、黏性、附着性",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "粉っぽさ",
+    "term_en": "powdery texture",
+    "term_zh_tw": "粉感",
+    "term_zh_cn": "粉感",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "粘り",
+    "term_en": "stickiness",
+    "term_zh_tw": "黏性",
+    "term_zh_cn": "黏性",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "糊化",
+    "term_en": "gelatinization",
+    "term_zh_tw": "糊化",
+    "term_zh_cn": "糊化",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "老化",
+    "term_en": "starch retrogradation / firming",
+    "term_zh_tw": "老化／回生",
+    "term_zh_cn": "老化／回生",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "芯残り",
+    "term_en": "hard center / undercooked core",
+    "term_zh_tw": "夾生／米心未熟",
+    "term_zh_cn": "夹生／米心未熟",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "蒸らし",
+    "term_en": "resting phase",
+    "term_zh_tw": "燜蒸／悶飯",
+    "term_zh_cn": "焖蒸／焖饭",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "遊離水",
+    "term_en": "free water",
+    "term_zh_tw": "游離水",
+    "term_zh_cn": "游离水",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "高アミロース米",
+    "term_en": "high-amylose rice",
+    "term_zh_tw": "高直鏈澱粉米",
+    "term_zh_cn": "高直链淀粉米",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  },
+  {
+    "term_ja": "高温保持",
+    "term_en": "high-temperature holding",
+    "term_zh_tw": "高溫保持",
+    "term_zh_cn": "高温保持",
+    "note_ja": "RICE NAVI工程カード用の統一訳語",
+    "note_en": "Preferred term for RICE NAVI process cards",
+    "note_zh_tw": "RICE NAVI工程卡統一用語",
+    "note_zh_cn": "RICE NAVI工序卡统一用语"
+  }
+]

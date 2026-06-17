@@ -1,0 +1,60 @@
+[
+  {
+    "load_order": 1,
+    "json_id": "module_manifest",
+    "file_name": "rice_navi_module_manifest_v2.json",
+    "module_id": "app_master",
+    "required": true
+  },
+  {
+    "load_order": 2,
+    "json_id": "app_menu",
+    "file_name": "rice_navi_app_menu_v2.json",
+    "module_id": "app_master",
+    "required": true
+  },
+  {
+    "load_order": 3,
+    "json_id": "learning_cards_multi",
+    "file_name": "rice_navi_learning_cards_multilingual_v82.json",
+    "module_id": "learning_cards",
+    "required": true
+  },
+  {
+    "load_order": 4,
+    "json_id": "glossary_multi",
+    "file_name": "rice_navi_term_glossary_multilingual_v82.json",
+    "module_id": "glossary_translation",
+    "required": true
+  },
+  {
+    "load_order": 5,
+    "json_id": "storage_rules",
+    "file_name": "rice_navi_storage_mold_rules_v1_0.json",
+    "module_id": "water_storage",
+    "required": true
+  },
+  {
+    "load_order": 6,
+    "json_id": "future_rice_50",
+    "file_name": "rice_navi_future_rice_50_ja_LATEST.json",
+    "module_id": "story_future_rice",
+    "required": true
+  },
+  {
+    "load_order": 7,
+    "json_id": "world_rice_story",
+    "file_name": null,
+    "module_id": "world_rice_story",
+    "required": false,
+    "status": "pending_v44_import"
+  },
+  {
+    "load_order": 8,
+    "json_id": "trouble_db",
+    "file_name": null,
+    "module_id": "trouble_navi",
+    "required": false,
+    "status": "pending_data_import"
+  }
+]

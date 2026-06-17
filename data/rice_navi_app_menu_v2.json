@@ -1,0 +1,58 @@
+[
+  {
+    "order": 1,
+    "menu_key": "today_learning",
+    "module_id": "learning_cards",
+    "display_name_ja": "今日の炊飯知識",
+    "position": "home_top"
+  },
+  {
+    "order": 2,
+    "menu_key": "trouble_navi",
+    "module_id": "trouble_navi",
+    "display_name_ja": "炊飯トラブル診断",
+    "position": "home_top"
+  },
+  {
+    "order": 3,
+    "menu_key": "temperature_map",
+    "module_id": "learning_cards",
+    "display_name_ja": "温度×時間×水分×物性",
+    "position": "learning"
+  },
+  {
+    "order": 4,
+    "menu_key": "water_storage_check",
+    "module_id": "water_storage",
+    "display_name_ja": "水質・保存チェック",
+    "position": "diagnosis"
+  },
+  {
+    "order": 5,
+    "menu_key": "world_rice_story",
+    "module_id": "world_rice_story",
+    "display_name_ja": "世界のライス物語",
+    "position": "home_top"
+  },
+  {
+    "order": 6,
+    "menu_key": "future_rice",
+    "module_id": "story_future_rice",
+    "display_name_ja": "お米の未来50",
+    "position": "story"
+  },
+  {
+    "order": 7,
+    "menu_key": "glossary",
+    "module_id": "glossary_translation",
+    "display_name_ja": "炊飯用語集",
+    "position": "search"
+  },
+  {
+    "order": 8,
+    "menu_key": "source_viewer",
+    "module_id": "learning_cards",
+    "display_name_ja": "出典を見る",
+    "position": "card_detail"
+  }
+]

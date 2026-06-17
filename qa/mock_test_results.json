@@ -1,0 +1,452 @@
+{
+  "generated_at": "2026-06-17T08:25:00.052021",
+  "app": "RICE NAVI",
+  "package": "v4_mock_test",
+  "test_results": [
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_app_menu_v2.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_future_rice_50_ja_LATEST.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_json_import_manifest_v2.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_learning_cards_multilingual_v82.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_module_manifest_v2.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_storage_mold_rules_v1_0.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse data/rice_navi_term_glossary_multilingual_v82.json",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JSON",
+      "test": "JSON parse manifest.webmanifest",
+      "expected": "valid JSON",
+      "actual": "valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JavaScript",
+      "test": "app.js syntax",
+      "expected": "node --check success",
+      "actual": "ok",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "JavaScript",
+      "test": "sw.js syntax",
+      "expected": "node --check success",
+      "actual": "ok",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset manifest.webmanifest",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset styles.css",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset app.js",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset assets/rice_navi_rn_logo.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset assets/icon-192.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "HTML/manifest asset assets/icon-512.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_module_manifest_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_app_menu_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_json_import_manifest_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_learning_cards_multilingual_v82.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_term_glossary_multilingual_v82.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_storage_mold_rules_v1_0.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Paths",
+      "test": "app.js DATA_FILES data/rice_navi_future_rice_50_ja_LATEST.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset index.html",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset styles.css",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset app.js",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset manifest.webmanifest",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset assets/rice_navi_rn_logo.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset assets/icon-192.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset assets/icon-512.png",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_module_manifest_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_app_menu_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_json_import_manifest_v2.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_learning_cards_multilingual_v82.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_term_glossary_multilingual_v82.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_storage_mold_rules_v1_0.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "sw.js cache asset data/rice_navi_future_rice_50_ja_LATEST.json",
+      "expected": "exists",
+      "actual": "True",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Counts",
+      "test": "learning cards count",
+      "expected": "82",
+      "actual": 82,
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Counts",
+      "test": "glossary count",
+      "expected": "30",
+      "actual": 30,
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Counts",
+      "test": "water rules count",
+      "expected": "20",
+      "actual": 20,
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Counts",
+      "test": "future rice items count",
+      "expected": "50",
+      "actual": 50,
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Translation",
+      "test": "learning required fields missing",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "English CJK leftovers",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "Chinese kana leftovers",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "Simplified known traditional leftovers",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "glossary missing fields",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "glossary English CJK leftovers",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "glossary Chinese kana leftovers",
+      "expected": "0",
+      "actual": 0,
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "category": "Translation",
+      "test": "water/storage module multilingual status",
+      "expected": "4-language full translation",
+      "actual": "Japanese source fields only",
+      "status": "WARN",
+      "detail": "App labels switch languages; rule text remains Japanese in this v4 package."
+    },
+    {
+      "category": "Translation",
+      "test": "future rice 50 multilingual status",
+      "expected": "4-language full translation",
+      "actual": "Japanese only",
+      "status": "WARN",
+      "detail": "The app displays a notice that this reading content is currently Japanese only."
+    },
+    {
+      "category": "PWA",
+      "test": "manifest display",
+      "expected": "standalone",
+      "actual": "standalone",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "manifest start_url",
+      "expected": "./index.html",
+      "actual": "./index.html",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "viewport meta",
+      "expected": "present",
+      "actual": "present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "PWA",
+      "test": "service worker register",
+      "expected": "present",
+      "actual": "present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "category": "Runtime mock",
+      "test": "all views render in all languages",
+      "expected": "24 ok",
+      "actual": "24 ok / 0 bad",
+      "status": "PASS",
+      "detail": "[]"
+    }
+  ],
+  "status_counts": {
+    "PASS": 53,
+    "WARN": 2,
+    "FAIL": 0
+  }
+}

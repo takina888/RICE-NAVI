@@ -1,0 +1,764 @@
+{
+  "module_id": "rice_navi_storage_mold",
+  "module_name": {
+    "ja": "納米庫・米タンク衛生チェック",
+    "zhTW": "納米庫／米槽衛生檢查",
+    "en": "Rice Bin Hygiene Check",
+    "zhCN": "纳米库／米槽卫生检查"
+  },
+  "version": "v1.0",
+  "created": "2026-06-17",
+  "purpose": {
+    "ja": "納米庫・米タンク・ホッパー周辺のカビ、結露、残留米、清掃状態を文献ベースで確認する。",
+    "zhTW": "依據文獻確認納米庫、米槽與料斗周邊的黴菌、結露、殘留米與清潔狀態。",
+    "en": "Literature-based check for mold, condensation, residual rice, and cleaning status around rice bins, tanks, and hoppers.",
+    "zhCN": "依据文献检查纳米库、米槽和料斗周边的霉菌、结露、残留米和清洁状态。"
+  },
+  "inputs": [
+    "bin_temp_c",
+    "humidity_pct",
+    "grain_temp_c",
+    "outside_temp_c",
+    "brown_rice_moisture_pct",
+    "paddy_moisture_pct",
+    "condensation",
+    "residual_rice",
+    "visible_mold",
+    "mold_odor",
+    "insects",
+    "days_since_cleaning",
+    "cleaning_record",
+    "spilled_rice",
+    "conveyor_residue",
+    "hot_humid_season"
+  ],
+  "sources": [
+    {
+      "source_id": "MOLD-SRC001",
+      "publisher": "MAFF",
+      "source_type": "公的機関",
+      "title": "米のカビ汚染防止のための管理ガイドライン",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/risk_analysis/priority/kabidoku/attach/pdf/index-4.pdf",
+      "use_in_rice_navi": "米の収穫・乾燥・貯蔵・清掃・カビ発見時対応に関する管理ガイドライン。温湿度、米水分、タンク点検、隔離判断に使用。",
+      "key_claims": "湿度70%・20〜30℃・玄米15.0%以下・籾米14.5%以下・タンク内壁露点検・カビ時隔離"
+    },
+    {
+      "source_id": "MOLD-SRC002",
+      "publisher": "MAFF",
+      "source_type": "公的機関/調査報告",
+      "title": "米のかび及びかび毒の汚染防止に関する取組",
+      "url": "https://www.maff.go.jp/j/study/risk_kanri/h26_1/attach/pdf/index-6.pdf",
+      "use_in_rice_navi": "乾燥調製・貯蔵段階でカビを生育させない管理の重要性。施設・設備・収穫・乾燥調製・貯蔵・出荷を管理対象とする根拠。",
+      "key_claims": "前後工程含む衛生管理、速やかな乾燥、高温多湿保管のリスク"
+    },
+    {
+      "source_id": "MOLD-SRC003",
+      "publisher": "MAFF",
+      "source_type": "公的機関/調査報告",
+      "title": "乾燥調製施設の塵埃等におけるカビ汚染調査",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/papers_posters/pdf/76th_mt.pdf",
+      "use_in_rice_navi": "乾燥機・籾すり機・床面等の塵埃から真菌が高頻度検出され、清掃により総真菌数が低減することを示す調査。",
+      "key_claims": "残留米・米くず・塵埃・清掃効果の根拠"
+    },
+    {
+      "source_id": "MOLD-SRC004",
+      "publisher": "MAFF",
+      "source_type": "公的機関",
+      "title": "大規模乾燥調製貯蔵施設の設置・管理上の留意事項",
+      "url": "https://www.maff.go.jp/j/seisan/suisin/tuyoi_nougyou/t_tuti_other/pdf/ryui_ziko.pdf",
+      "use_in_rice_navi": "サイロ・穀温・残留穀粒・結露・温度差管理に関する留意事項。納米庫には長期貯蔵設備の注意として応用。",
+      "key_claims": "穀温毎日監視、残留前年穀粒、温度差、結露、ローテーション"
+    },
+    {
+      "source_id": "MOLD-SRC005",
+      "publisher": "Shimane GAP",
+      "source_type": "公的/自治体資料",
+      "title": "美味しまね認証 GAP解説資料 穀物",
+      "url": "https://www.pref.shimane.lg.jp/life/syoku/anzen/oishimane/index.data/10kaisetu-kokumotu.pdf",
+      "use_in_rice_navi": "穀物水分管理、水分計確認、玄米・籾米の貯蔵水分目安に関する資料。",
+      "key_claims": "玄米15.0%以下、籾米14.5%以下、水分計確認"
+    },
+    {
+      "source_id": "MOLD-SRC006",
+      "publisher": "Codex",
+      "source_type": "国際規格",
+      "title": "Code of Practice for the Prevention and Reduction of Mycotoxin Contamination in Cereals CXC 51-2003",
+      "url": "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/tr/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXC%2B51-2003%252FCXC_051e.pdf",
+      "use_in_rice_navi": "穀類のカビ毒汚染をGAP/GMP/HACCPにより予防・監視・隔離する考え方。",
+      "key_claims": "炊飯調整ではなく予防管理・隔離・品質確認"
+    },
+    {
+      "source_id": "MOLD-SRC007",
+      "publisher": "WHO",
+      "source_type": "国際機関",
+      "title": "Mycotoxins fact sheet",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/mycotoxins",
+      "use_in_rice_navi": "マイコトキシンはカビが作る毒性化合物で、暖かく湿った条件で発生し、食品加工に耐えるものが多いと説明。",
+      "key_claims": "カビ臭・目視カビは使用停止。加熱で安全化する表示を避ける"
+    },
+    {
+      "source_id": "MOLD-SRC008",
+      "publisher": "FAO",
+      "source_type": "国際機関/技術資料",
+      "title": "Grain storage and condensation guidance",
+      "url": "https://www.fao.org/4/x5065e/x5065E09.htm",
+      "use_in_rice_navi": "穀物貯蔵における結露・乾燥・貯蔵条件に関する基礎資料。",
+      "key_claims": "乾燥不十分・温度差・結露リスク"
+    },
+    {
+      "source_id": "MOLD-SRC009",
+      "publisher": "US Grains Council Taiwan",
+      "source_type": "業界資料",
+      "title": "Corn Storage in Tropical Climates",
+      "url": "https://grains.org.tw/files/Corn-Storage-in-Tropical-Climates-English.pdf",
+      "use_in_rice_navi": "熱帯気候での穀物保管資料。水分、温度、保管期間、取扱履歴がカビ感染に影響する考え方を補助資料として使用。",
+      "key_claims": "熱帯・高温多湿環境での穀物保管リスク"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "MOLD001",
+      "theme": "温度",
+      "claim_ja": "多くのカビは20〜30℃程度で盛んに生育・増殖しやすい。",
+      "use_in_rule": "庫内温度が20〜30℃の場合、湿度・米水分・残留米と組み合わせて注意判定。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "一般論。ただし温度単独で使用停止判定にしない。"
+    },
+    {
+      "claim_id": "MOLD002",
+      "theme": "湿度",
+      "claim_ja": "相対湿度70％以上では結露しやすく、カビやダニが増えやすい。",
+      "use_in_rule": "庫内湿度70％以上でカビ・結露注意。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "70％は注意域。実際の水分活性・米水分・表面結露も見る。"
+    },
+    {
+      "claim_id": "MOLD003",
+      "theme": "低湿条件",
+      "claim_ja": "相対湿度70％以下では多くのカビが生育しにくい。",
+      "use_in_rule": "RH70％未満でも安全保証ではなく、胞子残存・残留米・水分を併せて確認。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "生育しにくい＝死滅ではない。"
+    },
+    {
+      "claim_id": "MOLD004",
+      "theme": "米水分",
+      "claim_ja": "常温貯蔵の目安として玄米水分15.0％以下、籾米14.5％以下を確認する。",
+      "use_in_rule": "玄米>15.0%、籾米>14.5%で保管リスク上昇。",
+      "source_ids": "MOLD-SRC001;MOLD-SRC005",
+      "evidence_level": "A",
+      "limitations": "白米・精米米には社内規格/仕様値を優先。"
+    },
+    {
+      "claim_id": "MOLD005",
+      "theme": "胞子残存",
+      "claim_ja": "カビは不適条件で生育しにくくなっても、胞子が残り条件が整うと再び生育する可能性がある。",
+      "use_in_rule": "乾燥・低湿だけで安心せず、残留米・清掃・隔離を管理。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "アプリでは『再発リスク』として表示。"
+    },
+    {
+      "claim_id": "MOLD006",
+      "theme": "タンク点検",
+      "claim_ja": "タンクやサイロでは、米表面や内壁に露・水濡れがないかを定期点検する。",
+      "use_in_rule": "納米庫の内壁・天井・米表面・排出口の結露点検をチェックリスト化。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "納米庫に適用しやすい。"
+    },
+    {
+      "claim_id": "MOLD007",
+      "theme": "臭気目視",
+      "claim_ja": "米を目で見て臭いを確認し、カビの有無を確認する。",
+      "use_in_rule": "カビ臭・目視カビは即時停止条件。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "炊飯調整対象にしない。"
+    },
+    {
+      "claim_id": "MOLD008",
+      "theme": "隔離",
+      "claim_ja": "カビが生育していた米は他の米と確実に分け、汚染拡大を防ぐ。",
+      "use_in_rule": "目視カビ/カビ臭ありは使用停止・隔離・品質確認。",
+      "source_ids": "MOLD-SRC001;MOLD-SRC006",
+      "evidence_level": "A",
+      "limitations": "廃棄判断は社内QA/法規に従う。"
+    },
+    {
+      "claim_id": "MOLD009",
+      "theme": "床落ち米",
+      "claim_ja": "乾燥調製中に床へ米を落とさず、床に落ちた米やほこりを取り除く。",
+      "use_in_rule": "床落ち米・こぼれ米を納米庫へ戻さない表示。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "現場チェック向き。"
+    },
+    {
+      "claim_id": "MOLD010",
+      "theme": "設備清掃",
+      "claim_ja": "米が直接触れる設備内部は使用前後だけでなく定期的に清掃し、乾燥させる。",
+      "use_in_rule": "清掃日未記録/長期未清掃は管理不十分。",
+      "source_ids": "MOLD-SRC001",
+      "evidence_level": "A",
+      "limitations": "納米庫・搬送ライン・ホッパーへ適用。"
+    },
+    {
+      "claim_id": "MOLD011",
+      "theme": "塵埃真菌",
+      "claim_ja": "乾燥調製施設の床面・乾燥機・籾すり機等の塵埃から真菌が高頻度で検出される。",
+      "use_in_rule": "排出口・角部・センサー周辺の米くず/塵埃を高優先点検。",
+      "source_ids": "MOLD-SRC003",
+      "evidence_level": "A",
+      "limitations": "乾燥調製施設調査。納米庫へは類似設備として応用。"
+    },
+    {
+      "claim_id": "MOLD012",
+      "theme": "清掃効果",
+      "claim_ja": "清掃により施設内の真菌数が大きく低減することが示されている。",
+      "use_in_rule": "清掃後確認・空運転・再点検を推奨。",
+      "source_ids": "MOLD-SRC003",
+      "evidence_level": "A",
+      "limitations": "定量値は施設条件依存。"
+    },
+    {
+      "claim_id": "MOLD013",
+      "theme": "残留穀粒",
+      "claim_ja": "サイロ内・昇降機等に残留した前年穀粒が品質事故の原因になる。",
+      "use_in_rule": "残留米あり/長期残留疑いで高リスク。",
+      "source_ids": "MOLD-SRC004",
+      "evidence_level": "A",
+      "limitations": "長期貯蔵施設の知見。納米庫では『長期残留米』として扱う。"
+    },
+    {
+      "claim_id": "MOLD014",
+      "theme": "穀温監視",
+      "claim_ja": "サイロ投入後は毎日定時に穀温を監視・記録する。",
+      "use_in_rule": "米温/庫内温度の記録なしは判定信頼度低下。",
+      "source_ids": "MOLD-SRC004",
+      "evidence_level": "A",
+      "limitations": "納米庫は短期滞留でも記録ルールとして有効。"
+    },
+    {
+      "claim_id": "MOLD015",
+      "theme": "温度差結露",
+      "claim_ja": "冬季はサイロ内外の温度差による結露防止が重要で、温度差を小さく管理する。",
+      "use_in_rule": "外気温と庫内/米温差が大きい場合は結露注意。目安10℃超で注意。",
+      "source_ids": "MOLD-SRC004",
+      "evidence_level": "A",
+      "limitations": "10℃は施設資料の管理考え方からの実装目安。"
+    },
+    {
+      "claim_id": "MOLD016",
+      "theme": "前後工程",
+      "claim_ja": "乾燥調製・貯蔵段階でカビを生育させない管理が重要で、建物・設備・貯蔵・出荷まで管理対象。",
+      "use_in_rule": "納米庫だけでなく投入前・排出後・搬送ラインもチェック対象。",
+      "source_ids": "MOLD-SRC002",
+      "evidence_level": "A",
+      "limitations": "モジュール名は『納米庫・米タンク衛生チェック』が適切。"
+    },
+    {
+      "claim_id": "MOLD017",
+      "theme": "カビ毒",
+      "claim_ja": "一部のカビ毒は食品加工で残る可能性があるため、カビ米を炊飯で解決する表示を避ける。",
+      "use_in_rule": "カビ臭/目視カビは使用停止・隔離。",
+      "source_ids": "MOLD-SRC006;MOLD-SRC007",
+      "evidence_level": "A",
+      "limitations": "安全判断は品質管理部門へ。"
+    },
+    {
+      "claim_id": "MOLD018",
+      "theme": "熱帯保管",
+      "claim_ja": "高温多湿環境では、水分・温度・保管期間・取扱履歴がカビリスクに影響する。",
+      "use_in_rule": "台湾等の高温多湿地域では保管履歴・温湿度履歴を重視。",
+      "source_ids": "MOLD-SRC009",
+      "evidence_level": "B",
+      "limitations": "米ではなく穀物一般/トウモロコシ中心。補助資料扱い。"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "MOLD-R01",
+      "rule_type": "即時停止",
+      "condition_ja": "目視カビあり",
+      "input_field": "",
+      "threshold": "",
+      "risk_level": "使用停止・隔離",
+      "score": 100,
+      "message_ja": "炊飯条件で解決しない。使用せず品質管理へ。",
+      "claim_ids": "MOLD007;MOLD008;MOLD017"
+    },
+    {
+      "rule_id": "MOLD-R02",
+      "rule_type": "即時停止",
+      "condition_ja": "カビ臭あり",
+      "input_field": "",
+      "threshold": "",
+      "risk_level": "使用停止・隔離",
+      "score": 100,
+      "message_ja": "カビ臭がある米は使用せず隔離。",
+      "claim_ids": "MOLD007;MOLD008;MOLD017"
+    },
+    {
+      "rule_id": "MOLD-R03",
+      "rule_type": "即時停止",
+      "condition_ja": "米表面の濡れ・固着あり",
+      "input_field": "",
+      "threshold": "",
+      "risk_level": "使用停止・確認",
+      "score": 90,
+      "message_ja": "結露・水濡れ・固着はカビ発生前後の重要兆候。",
+      "claim_ids": "MOLD006"
+    },
+    {
+      "rule_id": "MOLD-R04",
+      "rule_type": "高リスク",
+      "condition_ja": "庫内湿度 >= 70%",
+      "input_field": "humidity_pct",
+      "threshold": ">=70",
+      "risk_level": "高リスク",
+      "score": 25,
+      "message_ja": "結露・カビ・ダニ注意。換気/除湿/清掃を確認。",
+      "claim_ids": "MOLD002"
+    },
+    {
+      "rule_id": "MOLD-R05",
+      "rule_type": "注意",
+      "condition_ja": "庫内湿度 65〜69%",
+      "input_field": "humidity_pct",
+      "threshold": "65-69",
+      "risk_level": "注意",
+      "score": 10,
+      "message_ja": "70%未満でも結露・残留米と組み合わせて注意。",
+      "claim_ids": "MOLD002;MOLD003"
+    },
+    {
+      "rule_id": "MOLD-R06",
+      "rule_type": "注意",
+      "condition_ja": "庫内温度 20〜30℃",
+      "input_field": "bin_temp_c",
+      "threshold": "20-30",
+      "risk_level": "注意",
+      "score": 10,
+      "message_ja": "多くのカビが増えやすい温度帯。湿度・水分とセットで判定。",
+      "claim_ids": "MOLD001"
+    },
+    {
+      "rule_id": "MOLD-R07",
+      "rule_type": "高リスク",
+      "condition_ja": "庫内温度20〜30℃ かつ 湿度70%以上",
+      "input_field": "bin_temp_c+humidity_pct",
+      "threshold": "20-30 and >=70",
+      "risk_level": "高リスク",
+      "score": 35,
+      "message_ja": "温度・湿度が重なるため重点確認。",
+      "claim_ids": "MOLD001;MOLD002"
+    },
+    {
+      "rule_id": "MOLD-R08",
+      "rule_type": "高リスク",
+      "condition_ja": "結露あり",
+      "input_field": "condensation",
+      "threshold": "true",
+      "risk_level": "高リスク",
+      "score": 35,
+      "message_ja": "内壁・天井・米表面の露を確認。",
+      "claim_ids": "MOLD006;MOLD015"
+    },
+    {
+      "rule_id": "MOLD-R09",
+      "rule_type": "注意",
+      "condition_ja": "外気温と庫内/米温差 > 10℃",
+      "input_field": "temp_difference_c",
+      "threshold": ">10",
+      "risk_level": "結露注意",
+      "score": 15,
+      "message_ja": "温度差による結露に注意。",
+      "claim_ids": "MOLD015"
+    },
+    {
+      "rule_id": "MOLD-R10",
+      "rule_type": "高リスク",
+      "condition_ja": "残留米あり",
+      "input_field": "residual_rice",
+      "threshold": "true",
+      "risk_level": "高リスク",
+      "score": 30,
+      "message_ja": "排出口・角部・センサー周辺を清掃。",
+      "claim_ids": "MOLD011;MOLD013"
+    },
+    {
+      "rule_id": "MOLD-R11",
+      "rule_type": "高リスク",
+      "condition_ja": "長期残留米の疑い",
+      "input_field": "long_residue",
+      "threshold": "true",
+      "risk_level": "高リスク",
+      "score": 40,
+      "message_ja": "次ロットに混ぜず、清掃・隔離。",
+      "claim_ids": "MOLD013"
+    },
+    {
+      "rule_id": "MOLD-R12",
+      "rule_type": "注意",
+      "condition_ja": "清掃履歴なし/前回清掃日不明",
+      "input_field": "cleaning_record",
+      "threshold": "missing",
+      "risk_level": "注意",
+      "score": 10,
+      "message_ja": "管理不十分。清掃記録を残す。",
+      "claim_ids": "MOLD010;MOLD012"
+    },
+    {
+      "rule_id": "MOLD-R13",
+      "rule_type": "高リスク",
+      "condition_ja": "前回清掃から長期間経過",
+      "input_field": "days_since_cleaning",
+      "threshold": ">=7",
+      "risk_level": "高リスク",
+      "score": 20,
+      "message_ja": "日数閾値は社内基準で変更可。",
+      "claim_ids": "MOLD010;MOLD012"
+    },
+    {
+      "rule_id": "MOLD-R14",
+      "rule_type": "高リスク",
+      "condition_ja": "玄米水分 > 15.0%",
+      "input_field": "brown_rice_moisture_pct",
+      "threshold": ">15.0",
+      "risk_level": "高リスク",
+      "score": 25,
+      "message_ja": "常温貯蔵リスク上昇。",
+      "claim_ids": "MOLD004"
+    },
+    {
+      "rule_id": "MOLD-R15",
+      "rule_type": "高リスク",
+      "condition_ja": "籾米水分 > 14.5%",
+      "input_field": "paddy_moisture_pct",
+      "threshold": ">14.5",
+      "risk_level": "高リスク",
+      "score": 25,
+      "message_ja": "常温貯蔵リスク上昇。",
+      "claim_ids": "MOLD004"
+    },
+    {
+      "rule_id": "MOLD-R16",
+      "rule_type": "注意",
+      "condition_ja": "水分計未確認",
+      "input_field": "moisture_measured",
+      "threshold": "false",
+      "risk_level": "注意",
+      "score": 10,
+      "message_ja": "水分値がない場合は判定信頼度を下げる。",
+      "claim_ids": "MOLD004"
+    },
+    {
+      "rule_id": "MOLD-R17",
+      "rule_type": "注意",
+      "condition_ja": "虫あり",
+      "input_field": "insects",
+      "threshold": "true",
+      "risk_level": "注意/高リスク",
+      "score": 15,
+      "message_ja": "虫害・カビ・ダニリスクの可能性。発生量で判定。",
+      "claim_ids": "MOLD002"
+    },
+    {
+      "rule_id": "MOLD-R18",
+      "rule_type": "注意",
+      "condition_ja": "床落ち米/こぼれ米あり",
+      "input_field": "spilled_rice",
+      "threshold": "true",
+      "risk_level": "注意",
+      "score": 15,
+      "message_ja": "納米庫へ戻さず廃棄/隔離。",
+      "claim_ids": "MOLD009"
+    },
+    {
+      "rule_id": "MOLD-R19",
+      "rule_type": "注意",
+      "condition_ja": "搬送ライン・昇降機に残留あり",
+      "input_field": "conveyor_residue",
+      "threshold": "true",
+      "risk_level": "高リスク",
+      "score": 25,
+      "message_ja": "前後工程も清掃対象。",
+      "claim_ids": "MOLD013;MOLD016"
+    },
+    {
+      "rule_id": "MOLD-R20",
+      "rule_type": "注意",
+      "condition_ja": "高温多湿地域/季節",
+      "input_field": "hot_humid_season",
+      "threshold": "true",
+      "risk_level": "注意",
+      "score": 5,
+      "message_ja": "台湾など高温多湿環境では温湿度履歴を重視。",
+      "claim_ids": "MOLD018"
+    }
+  ],
+  "checklist": [
+    {
+      "check_id": "CHK001",
+      "timing": "毎ロット前",
+      "check_area": "点検口・ふた・天井部",
+      "check_item": "水滴・露・濡れ跡がないか",
+      "method": "目視",
+      "action_if_ng": "ありなら使用停止/乾燥/確認",
+      "claim_ids": "MOLD006;MOLD015"
+    },
+    {
+      "check_id": "CHK002",
+      "timing": "毎ロット前",
+      "check_area": "内壁",
+      "check_item": "結露跡・付着米・変色がないか",
+      "method": "目視/写真",
+      "action_if_ng": "ありなら清掃・原因確認",
+      "claim_ids": "MOLD006"
+    },
+    {
+      "check_id": "CHK003",
+      "timing": "毎ロット前",
+      "check_area": "排出口",
+      "check_item": "残留米・固着米・粉だまりがないか",
+      "method": "目視/手入れ可否",
+      "action_if_ng": "残留米は次ロットへ混ぜない",
+      "claim_ids": "MOLD011;MOLD013"
+    },
+    {
+      "check_id": "CHK004",
+      "timing": "毎ロット前",
+      "check_area": "センサー/レベル計周辺",
+      "check_item": "米粉・米粒の付着がないか",
+      "method": "目視",
+      "action_if_ng": "付着があれば清掃",
+      "claim_ids": "MOLD011"
+    },
+    {
+      "check_id": "CHK005",
+      "timing": "毎日",
+      "check_area": "庫内温度・湿度",
+      "check_item": "温度20〜30℃、湿度70%以上の組み合わせ",
+      "method": "計測",
+      "action_if_ng": "高リスク表示",
+      "claim_ids": "MOLD001;MOLD002"
+    },
+    {
+      "check_id": "CHK006",
+      "timing": "毎日",
+      "check_area": "米温",
+      "check_item": "上昇傾向がないか",
+      "method": "温度計/記録",
+      "action_if_ng": "上昇時は原因確認",
+      "claim_ids": "MOLD014"
+    },
+    {
+      "check_id": "CHK007",
+      "timing": "入荷/投入時",
+      "check_area": "米水分",
+      "check_item": "玄米15.0%以下/籾14.5%以下など基準内か",
+      "method": "水分計",
+      "action_if_ng": "基準超えは保管条件確認",
+      "claim_ids": "MOLD004"
+    },
+    {
+      "check_id": "CHK008",
+      "timing": "毎日",
+      "check_area": "臭い",
+      "check_item": "カビ臭・異臭がないか",
+      "method": "官能確認",
+      "action_if_ng": "ありなら使用停止・隔離",
+      "claim_ids": "MOLD007;MOLD008"
+    },
+    {
+      "check_id": "CHK009",
+      "timing": "毎日",
+      "check_area": "目視カビ",
+      "check_item": "白・青・黒・緑などのカビ様付着がないか",
+      "method": "目視/写真",
+      "action_if_ng": "ありなら使用停止・隔離",
+      "claim_ids": "MOLD007;MOLD008;MOLD017"
+    },
+    {
+      "check_id": "CHK010",
+      "timing": "清掃時",
+      "check_area": "床/周辺",
+      "check_item": "こぼれ米・ほこり・米くずがないか",
+      "method": "目視/清掃記録",
+      "action_if_ng": "回収米を戻さない",
+      "claim_ids": "MOLD009"
+    },
+    {
+      "check_id": "CHK011",
+      "timing": "清掃時",
+      "check_area": "搬送ライン接続部",
+      "check_item": "昇降機・投入配管・スクリュー周辺に残留がないか",
+      "method": "目視/分解点検",
+      "action_if_ng": "残留は清掃・空運転",
+      "claim_ids": "MOLD013;MOLD016"
+    },
+    {
+      "check_id": "CHK012",
+      "timing": "異常時",
+      "check_area": "隔離判断",
+      "check_item": "問題米を他米と分けたか",
+      "method": "記録",
+      "action_if_ng": "品質管理へ連絡",
+      "claim_ids": "MOLD008;MOLD017"
+    }
+  ],
+  "ui_texts": {
+    "mold_module_title": {
+      "ja": "納米庫・米タンク衛生チェック",
+      "zhTW": "納米庫／米槽衛生檢查",
+      "en": "Rice Bin Hygiene Check",
+      "zhCN": "纳米库／米槽卫生检查"
+    },
+    "mold_module_subtitle": {
+      "ja": "カビ・結露・残留米・清掃状態を確認します。",
+      "zhTW": "檢查黴菌、結露、殘留米與清潔狀態。",
+      "en": "Check mold, condensation, residual rice, and cleaning status.",
+      "zhCN": "检查霉菌、结露、残留米和清洁状态。"
+    },
+    "risk_stop": {
+      "ja": "使用停止・隔離推奨",
+      "zhTW": "建議停止使用並隔離",
+      "en": "Stop use and isolate",
+      "zhCN": "建议停止使用并隔离"
+    },
+    "risk_high": {
+      "ja": "高リスク",
+      "zhTW": "高風險",
+      "en": "High risk",
+      "zhCN": "高风险"
+    },
+    "risk_attention": {
+      "ja": "注意",
+      "zhTW": "注意",
+      "en": "Caution",
+      "zhCN": "注意"
+    },
+    "risk_low": {
+      "ja": "低リスク",
+      "zhTW": "低風險",
+      "en": "Low risk",
+      "zhCN": "低风险"
+    },
+    "reason_humidity70": {
+      "ja": "庫内湿度が70％以上です。結露・カビ・ダニに注意してください。",
+      "zhTW": "庫內濕度達70%以上，請注意結露、黴菌與蟎害。",
+      "en": "Bin humidity is 70% or higher. Watch for condensation, mold, and mites.",
+      "zhCN": "库内湿度达到70%以上，请注意结露、霉菌和螨害。"
+    },
+    "reason_temp2030": {
+      "ja": "庫内温度が20〜30℃帯です。湿度や残留米と組み合わせて確認してください。",
+      "zhTW": "庫內溫度在20〜30℃區間，請與濕度及殘留米一起判斷。",
+      "en": "Bin temperature is in the 20–30°C range. Check together with humidity and residual rice.",
+      "zhCN": "库内温度在20–30℃区间，请结合湿度和残留米判断。"
+    },
+    "reason_condensation": {
+      "ja": "結露または水濡れがあります。使用前に原因確認と清掃・乾燥を行ってください。",
+      "zhTW": "發現結露或潮濕，使用前請確認原因並清潔、乾燥。",
+      "en": "Condensation or wetting is present. Identify the cause, clean, and dry before use.",
+      "zhCN": "发现结露或潮湿，使用前请确认原因并清洁、干燥。"
+    },
+    "reason_residue": {
+      "ja": "残留米があります。次ロットに混ぜず、排出口・角部・センサー周辺を清掃してください。",
+      "zhTW": "有殘留米。請勿混入下一批，並清潔出口、角落與感測器周邊。",
+      "en": "Residual rice is present. Do not mix it into the next lot; clean outlets, corners, and sensors.",
+      "zhCN": "有残留米。请勿混入下一批，并清洁出口、角落和传感器周边。"
+    },
+    "reason_visible_mold": {
+      "ja": "目視カビがあります。炊飯条件で解決せず、使用停止・隔離・品質確認を行ってください。",
+      "zhTW": "發現可見黴菌。不要用炊飯條件處理，請停止使用、隔離並確認品質。",
+      "en": "Visible mold is present. Do not treat it as a cooking adjustment issue; stop use, isolate, and check quality.",
+      "zhCN": "发现可见霉菌。不要用煮饭条件处理，请停止使用、隔离并确认品质。"
+    },
+    "reason_mold_odor": {
+      "ja": "カビ臭があります。使用停止・隔離・品質管理確認を行ってください。",
+      "zhTW": "有黴味。請停止使用、隔離並由品質管理確認。",
+      "en": "Mold odor is present. Stop use, isolate, and confirm with quality control.",
+      "zhCN": "有霉味。请停止使用、隔离并由质量管理确认。"
+    },
+    "action_clean": {
+      "ja": "残留米・米くず・塵埃を清掃し、清掃後に空運転と再点検を行ってください。",
+      "zhTW": "清除殘留米、米屑與粉塵，清潔後請空轉並再次檢查。",
+      "en": "Clean residual rice, rice fragments, and dust; run empty and recheck after cleaning.",
+      "zhCN": "清除残留米、米屑和粉尘，清洁后请空转并再次检查。"
+    },
+    "action_record": {
+      "ja": "温度・湿度・米温・清掃日を記録してください。",
+      "zhTW": "請記錄溫度、濕度、米溫與清潔日期。",
+      "en": "Record temperature, humidity, grain temperature, and cleaning date.",
+      "zhCN": "请记录温度、湿度、米温和清洁日期。"
+    },
+    "caution_reference": {
+      "ja": "この判定は文献に基づく参考判定です。最終判断は品質管理基準と現場責任者の確認に従ってください。",
+      "zhTW": "此判定為依文獻建立的參考判定。最終判斷請依品質管理基準與現場負責人確認。",
+      "en": "This is a literature-based reference assessment. Final decisions should follow your quality standards and site supervisor confirmation.",
+      "zhCN": "该判定是基于文献的参考判定。最终判断请依据质量管理标准和现场负责人确认。"
+    }
+  },
+  "scoring": [
+    {
+      "score_min": 100,
+      "score_max": 999,
+      "risk_level": "stop",
+      "label": {
+        "ja": "使用停止・隔離推奨",
+        "zhTW": "建議停止使用並隔離",
+        "en": "Stop use and isolate",
+        "zhCN": "建议停止使用并隔离"
+      }
+    },
+    {
+      "score_min": 60,
+      "score_max": 99,
+      "risk_level": "high",
+      "label": {
+        "ja": "高リスク",
+        "zhTW": "高風險",
+        "en": "High risk",
+        "zhCN": "高风险"
+      }
+    },
+    {
+      "score_min": 25,
+      "score_max": 59,
+      "risk_level": "caution",
+      "label": {
+        "ja": "注意",
+        "zhTW": "注意",
+        "en": "Caution",
+        "zhCN": "注意"
+      }
+    },
+    {
+      "score_min": 0,
+      "score_max": 24,
+      "risk_level": "low",
+      "label": {
+        "ja": "低リスク",
+        "zhTW": "低風險",
+        "en": "Low risk",
+        "zhCN": "低风险"
+      }
+    }
+  ],
+  "important_caution": {
+    "ja": "目視カビ・カビ臭がある米は、炊飯条件の調整対象ではありません。使用せず、隔離・品質管理確認を行ってください。",
+    "zhTW": "發現可見黴菌或黴味的米，不是調整炊飯條件的對象。請停止使用、隔離並進行品質確認。",
+    "en": "Rice with visible mold or mold odor is not a cooking adjustment issue. Do not use it; isolate it and confirm with quality control.",
+    "zhCN": "发现可见霉菌或霉味的米，不是调整煮饭条件的对象。请停止使用、隔离并进行质量确认。"
+  },
+  "disclaimer": {
+    "ja": "この判定は文献に基づく参考判定です。最終判断は品質管理基準と現場責任者の確認に従ってください。",
+    "zhTW": "此判定為依文獻建立的參考判定。最終判斷請依品質管理基準與現場負責人確認。",
+    "en": "This is a literature-based reference assessment. Final decisions should follow your quality standards and site supervisor confirmation.",
+    "zhCN": "该判定是基于文献的参考判定。最终判断请依据质量管理标准和现场负责人确认。"
+  }
+}

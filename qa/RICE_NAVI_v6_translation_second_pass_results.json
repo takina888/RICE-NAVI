@@ -1,0 +1,12 @@
+{
+  "version": "v6_second_pass",
+  "cards_checked": 82,
+  "fixes_applied": 111,
+  "critical_residual_issues": 0,
+  "checks": {
+    "translation_blanks": 0,
+    "english_cjk_or_kana": 0,
+    "chinese_kana": 0,
+    "known_bad_tokens": 0
+  }
+}

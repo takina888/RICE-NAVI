@@ -1,0 +1,7 @@
+{
+  "version": "v6_second_pass",
+  "checked_at": "2026-06-17T08:39:45.623787Z",
+  "cards": 82,
+  "fix_count": 111,
+  "notes": "Second-pass translation QA focused on unnatural field_check_points, Japanese remnants in Chinese, simplified/traditional cleanup, and vague numeric condition wording."
+}
