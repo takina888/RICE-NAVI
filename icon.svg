@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="108" fill="#0874f2"/>
-  <text x="255" y="315" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="168" font-weight="900" fill="#fff" letter-spacing="-14">RN</text>
-  <path d="M360 178l76-42-38 81-15-32z" fill="#fff"/>
-  <path d="M122 356c88 36 180 36 268 0" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
-</svg>
