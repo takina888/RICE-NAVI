@@ -1,111 +1,62 @@
-const DATA_FILES = {
-  modules: 'data/rice_navi_module_manifest_v2.json',
-  menu: 'data/rice_navi_app_menu_v2.json',
-  learning: 'data/rice_navi_learning_cards_multilingual_current.json',
-  glossary: 'data/rice_navi_term_glossary_multilingual_v82.json',
-  water: 'data/rice_navi_storage_mold_rules_v1_0.json',
-  future: 'data/rice_navi_future_rice_50_ja_LATEST.json',
-  tempEvents: 'data/rice_navi_temperature_event_map_v77.json'
-};
-const state = { view:'home', lang:'ja', query:'', data:{} };
-const fortuneSeeds = [
-  {title:'吸水運アップ', msg:'急がず、準備の時間を大切にすると整いやすい日です。', rice:'コシヒカリ', step:'浸漬', emoji:'🍚'},
-  {title:'ふっくら運', msg:'水分の行き先をよく見ると、次の一手が見えやすい日です。', rice:'あきたこまち', step:'蒸らし', emoji:'🌾'},
-  {title:'観察運アップ', msg:'結果だけでなく、温度と時間の流れを見直すと発見があります。', rice:'ひとめぼれ', step:'温度記録', emoji:'📈'},
-  {title:'粒感運', msg:'粘りと付着性を分けて見ると、炊き上がりの理由が整理できます。', rice:'ササニシキ', step:'ほぐし', emoji:'✨'},
-  {title:'水運よし', msg:'水の条件を確認すると、いつもの炊飯が少し読みやすくなります。', rice:'台中秈10号', step:'加水', emoji:'💧'}
-];
-const homeItems = [
-  {view:'fortune', title:'今日の米占い', sub:'毎日軽く楽しめる米テーマの一言', icon:'🍚', art:'🌾', main:true},
-  {view:'history', title:'現在地のお米ヒストリー', sub:'今いる場所のお米の歴史を表示する', icon:'📍', art:'🏞️'},
-  {view:'world', title:'世界のライス物語', sub:'世界の米文化・料理・食べ方を読む', icon:'🌏', art:'🍛'},
-  {view:'future', title:'お米の未来', sub:'これからの米づくり、技術、食文化を読む', icon:'🌱', art:'🚜'},
-  {view:'library', title:'炊飯文献ライブラリ', sub:'炊飯に関する文献・claimを整理する', icon:'📚', art:'🏅', important:true},
-  {view:'meister', title:'お米マイスター100', sub:'米の基本を100テーマで学ぶ', icon:'🎓', art:'📖'},
-  {view:'varieties', title:'米品種図鑑', sub:'世界と日本の米品種を調べる', icon:'🔎', art:'🌾'},
-  {view:'water', title:'水の相性チェック', sub:'pH、硬度、TDSなどから水と炊飯の関係を見る', icon:'💧', art:'💦'},
-  {view:'environment', title:'気温・湿度・保管環境チェック', sub:'現在の環境から米の保管・吸水・カビリスクを見る', icon:'🌤️', art:'🌡️'},
-  {view:'bin', title:'納米庫チェッカー', sub:'納米庫の湿度、結露、残留米、カビ臭を確認する', icon:'🏭', art:'✅'}
-];
-async function loadJson(path){ const r = await fetch(path); if(!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); }
-async function init(){
-  try{
-    const [modules, menu, learning, glossary, water, future, tempEvents] = await Promise.all(Object.values(DATA_FILES).map(loadJson));
-    state.data = {modules, menu, learning, glossary, water, future, tempEvents};
-    wireEvents(); render();
-    if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
-  }catch(e){ document.getElementById('app').innerHTML = `<section class="panel"><h2>読み込みエラー</h2><p>${esc(e.message)}</p></section>`; }
-}
-function wireEvents(){
-  document.querySelectorAll('.bottom-nav button').forEach(b => b.addEventListener('click',()=>{ state.view=b.dataset.view; setActive(); render(); window.scrollTo({top:0,behavior:'smooth'}); }));
-  document.getElementById('searchToggle').addEventListener('click',()=>document.getElementById('searchInput').focus());
-  document.getElementById('searchInput').addEventListener('input', e=>{ state.query=e.target.value.trim().toLowerCase(); if(state.query && state.view==='home') state.view='library'; setActive(); render(); });
-  document.getElementById('languageSelect').addEventListener('change',e=>{ state.lang=e.target.value; render(); });
-}
-function setActive(){ document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.toggle('active', b.dataset.view===state.view)); }
-function render(){
-  const app=document.getElementById('app');
-  if(state.view==='home') app.innerHTML = renderHome();
-  else if(state.view==='meister') app.innerHTML = renderMeister();
-  else if(state.view==='library') app.innerHTML = renderLibrary();
-  else if(state.view==='checks') app.innerHTML = renderChecks();
-  else if(state.view==='status') app.innerHTML = renderStatus();
-  else if(state.view==='fortune') app.innerHTML = renderFortuneDetail();
-  else if(state.view==='history') app.innerHTML = renderHistory();
-  else if(state.view==='world') app.innerHTML = renderWorld();
-  else if(state.view==='future') app.innerHTML = renderFuture();
-  else if(state.view==='varieties') app.innerHTML = renderVarieties();
-  else if(state.view==='water' || state.view==='environment' || state.view==='bin') app.innerHTML = renderChecks(state.view);
-}
-function todayIdx(n){ const d=new Date(); const s=new Date(d.getFullYear(),0,0); return Math.floor((d-s)/86400000)%n; }
-function todayFortune(){ return fortuneSeeds[todayIdx(fortuneSeeds.length)]; }
-function localized(card){ return card.i18n?.[state.lang] || card.i18n?.ja || card; }
-function renderHome(){
-  const f=todayFortune();
-  return `
-  <section class="fortune-card" data-view="fortune" onclick="goView('fortune')">
-    <div class="fortune-top"><div class="rice-illust">${f.emoji}</div><div><h2>✨ 今日の米占い ✨</h2><p><b>${esc(f.title)}</b><br>${esc(f.msg)}</p></div></div>
-    <div class="fortune-tags"><div class="fortune-tag"><small>ラッキー米</small><b>${esc(f.rice)}</b></div><div class="fortune-tag"><small>ラッキー工程</small><b>${esc(f.step)}</b></div></div>
-    <div class="carousel-dots"><i></i><i></i><i></i><i></i></div>
-  </section>
-  <div class="section-title"><h2>今日の入口</h2><span>面白さから入る</span></div>
-  <div class="menu-list">${homeItems.slice(1,4).map(menuCard).join('')}</div>
-  <div class="section-title"><h2>信頼性の中心</h2><span>文献claim</span></div>
-  <div class="menu-list">${homeItems.slice(4,5).map(menuCard).join('')}</div>
-  <div class="section-title"><h2>学ぶ・調べる</h2><span>順番に進める</span></div>
-  <div class="menu-list">${homeItems.slice(5,7).map(menuCard).join('')}</div>
-  <div class="section-title"><h2>現場・環境確認</h2><span>参考値として見る</span></div>
-  <div class="menu-list">${homeItems.slice(7).map(menuCard).join('')}</div>
-  <div class="notice">位置情報は起動時または1日1回程度の取得を想定。常時バックグラウンド取得はしません。取得できない場合は最後に取得した地域を使います。</div>`;
-}
-function menuCard(item){ return `<a href="#" class="menu-card ${item.important?'important':''}" onclick="goView('${item.view}');return false"><div class="menu-icon">${item.icon}</div><div><h3>${item.title}</h3><p>${item.sub}</p></div><div class="menu-art">${item.art}</div><div class="chev">›</div></a>`; }
-function renderFortuneDetail(){ const f=todayFortune(); return `<section class="fortune-card"><div class="fortune-top"><div class="rice-illust">${f.emoji}</div><div><h2>今日の米占い</h2><p><b>${esc(f.title)}</b><br>${esc(f.msg)}</p></div></div><div class="fortune-tags"><div class="fortune-tag"><small>ラッキー米</small><b>${esc(f.rice)}</b></div><div class="fortune-tag"><small>ラッキー工程</small><b>${esc(f.step)}</b></div></div></section><section class="panel"><h2>注意</h2><p>米占いはお楽しみ機能です。診断・品質判定・現場判断には使いません。</p></section>`; }
-function renderHistory(){ return `<section class="panel"><h2>現在地のお米ヒストリー</h2><span class="badge">現在地：台湾</span><p>この土地のお米ヒストリーを表示します。例：日本統治時代の台湾では、日本型の稉米を台湾の気候に合わせる品種改良が進み、蓬莱米の普及につながりました。</p><p class="small">この表示は最後に取得した位置情報をもとにしています。現在地と違う場合は地域を変更してください。</p></section>`; }
-function renderWorld(){ return `<section class="panel"><h2>世界のライス物語</h2><p>世界各地の米文化・料理・食べ方を週1ストーリーで表示します。過去のストーリーも閲覧できる想定です。</p></section><div class="card-grid">${['台湾のQ弾食感','日本のおにぎり文化','タイの香り米','インドのビリヤニ'].map((x,i)=>`<article class="learning-card"><span class="badge">Story ${i+1}</span><h3>${x}</h3><p>米の種類、水分、粘り、粒感、料理との相性につながる短い読み物。</p></article>`).join('')}</div>`; }
-function renderFuture(){ const items=(state.data.future.items||[]).slice(0,12); return `<section class="panel"><h2>お米の未来</h2><p>研究・政策・社会変化に沿った、少しやわらかい未来読み物です。</p></section><div class="card-grid">${items.map(i=>`<article class="learning-card"><span class="badge">${esc(i.category)}</span><h3>${esc(i.title_ja)}</h3><p><b>${esc(i.subtitle_ja||'')}</b></p><p>${esc(i.body_ja||'')}</p></article>`).join('')}</div>`; }
-function renderMeister(){
-  const cards=state.data.learning || [];
-  const chunks=[cards.slice(0,28),cards.slice(28,56),cards.slice(56,82)];
-  const labels=['初級','中級','上級'];
-  const tempRows = (state.data.tempEvents||[]).slice(0,6).map(e=>`<tr><td>${esc(e.temperature_range || e.temperature_band || e.temperature || '')}</td><td>${esc(e.rice_change_event || e.event || e.summary || '')}</td></tr>`).join('');
-  return `<section class="panel"><h2>お米マイスター100</h2><p>米の基本と炊飯工程を、初級・中級・上級に分けて順番に学びます。</p><div class="course-strip">${labels.map((l,i)=>`<button class="course-chip" onclick="document.getElementById('course${i}').scrollIntoView({behavior:'smooth'})">${l}</button>`).join('')}</div></section>
-  <section class="panel"><h2>温度と時間の関係</h2><p class="small">以前作成した「温度×時間×水分×物性」の工程表は、お米マイスター内の中核表として配置します。</p><table class="temp-table">${tempRows || '<tr><td>60℃前後</td><td>糊化が始まる温度帯として学ぶ</td></tr><tr><td>98℃以上</td><td>高温保持時間と糊化の関係を見る</td></tr>'}</table></section>
-  ${chunks.map((chunk,i)=>`<section class="panel" id="course${i}"><h2>${labels[i]}</h2><p class="small">${i===0?'米と炊飯工程の基本':i===1?'水・温度・物性の関係':'条件付きclaimとトラブル接続'}</p></section><div class="lesson-list">${chunk.slice(0,12).map((c,j)=>{const lc=localized(c); return `<article class="lesson-item" onclick="goView('library','${c.card_id}')"><div class="lesson-no">${i*28+j+1}</div><div><h3>${esc(lc.title)}</h3><p>${esc(lc.short||'')}</p></div><div class="chev">›</div></article>`}).join('')}</div>`).join('')}`;
-}
-function renderLibrary(targetId){
-  const q=state.query;
-  const cards=(state.data.learning||[]).filter(c=>!q || JSON.stringify(c).toLowerCase().includes(q));
-  return `<section class="panel"><h2>炊飯文献ライブラリ</h2><p>RICE NAVIの信頼性の中心です。文献claim、条件、使える範囲、注意点を確認します。</p><p class="small">${cards.length} / ${(state.data.learning||[]).length} cards</p></section><div class="card-grid">${cards.map(renderLearningCard).join('')}</div>`;
-}
-function renderLearningCard(card){ const c=localized(card); const st=card.status||'formal'; return `<article class="learning-card" id="${esc(card.card_id)}"><span class="badge ${st}">${esc(st)}</span><span class="badge">${esc(card.evidence_level||'')}</span><h3>${esc(c.title||card.card_id)}</h3><p><b>${esc(c.short||'')}</b></p><p>${esc(c.easy||'')}</p>${c.numbers_conditions?`<p><b>数値・条件：</b>${esc(c.numbers_conditions)}</p>`:''}${c.warning?`<div class="notice">${esc(c.warning)}</div>`:''}<div class="trace">source: ${esc(card.source_ids||c.source_ids||'')}<br>claim: ${esc(card.claim_ids||c.claim_ids||'')}</div></article>`; }
-function renderChecks(specific){
-  const all=[homeItems[7],homeItems[8],homeItems[9]];
-  const items=specific ? all.filter(x=>x.view===specific) : all;
-  const purpose=state.data.water?.purpose?.ja || '水質・保存・納米庫の状態を確認します。';
-  return `<section class="panel"><h2>現場・環境確認</h2><p>${esc(purpose).replace('納米庫・米タンク・ホッパー周辺','納米庫周辺')}</p><p class="small">地域参考値や入力値は断定ではなく、確認の入口として扱います。</p></section><div class="menu-list">${items.map(menuCard).join('')}</div><section class="panel"><h2>確認例</h2><ul>${['pH・硬度・TDS・残留塩素を見る','高温高湿時の保管注意を確認する','納米庫の結露、残留米、カビ臭、虫を確認する'].map(x=>`<li>${x}</li>`).join('')}</ul></section>`;
-}
-function renderVarieties(){ return `<section class="panel"><h2>米品種図鑑</h2><p>品種名、国・地域、系統、粒形、アミロース、たんぱく質、食味・食感、用途、出典を確認する図鑑です。</p><div class="notice">一般参考値は入れません。不明な数値は未確認、推定値は推定と明記します。</div></section>`; }
-function renderStatus(){ const mods=state.data.modules.modules||[]; return `<section class="panel"><h2>統合状況</h2><p>RICE NAVI v9 home UI redesign。アプリは1つ、Excel/JSONは用途別分割管理。</p></section><div class="card-grid">${mods.map(m=>`<article class="learning-card"><h3>${esc(m.display_name?.ja||m.module_id)}</h3><span class="badge ${m.status==='ready'||m.status==='ja_ready'?'formal':'conditional'}">${esc(m.status)}</span><p class="small">${esc(m.source||'')}</p><p class="small">count: ${esc(m.count ?? '-')}</p></article>`).join('')}</div>`; }
-function goView(view,target){ state.view=view; setActive(); render(); setTimeout(()=>{ if(target){ document.getElementById(target)?.scrollIntoView({behavior:'smooth'}); } else { window.scrollTo({top:0,behavior:'smooth'}); } },30); }
-function esc(v){ return String(v??'').replace(/[&<>'"]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[s])); }
+
+const DATA_URL = './data/rice_navi_data_v12.json';
+let DATA = null;
+let state = { view:'home', open:{fortune:true,history:false,story:false}, region: localStorage.getItem('riceNaviRegion') || '台湾', litCat:'すべて', lessonLevel:'初級', lessonIndex:0, futureId:null, storyId:null, varietyQuery:'', litQuery:'' };
+const $ = (sel,root=document)=>root.querySelector(sel);
+const esc = s => String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function todayIndex(len, salt=0){const d=new Date(); const key=Math.floor((d - new Date(d.getFullYear(),0,0))/86400000)+salt; return len? key%len:0;}
+async function init(){ DATA = await fetch(DATA_URL).then(r=>r.json()); render(); if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{});} }
+function setView(view){state.view=view; window.scrollTo({top:0,behavior:'smooth'}); render();}
+function toggle(key){state.open[key]=!state.open[key]; renderHome();}
+function appTop(title='RICE NAVI', back=false){return `<header class="topbar"><img class="logo" src="assets/rice_navi_rn_logo.png" alt="RICE NAVI"><div class="brand">${esc(title)}</div><div class="top-actions"><button class="icon-btn" onclick="setView('search')" aria-label="検索">🔍</button></div></header>`;}
+function bottomNav(){const items=[['home','🏠','ホーム'],['meister','📘','学ぶ'],['literature','📚','文献'],['checks','✅','チェック'],['status','ℹ️','状況']];return `<nav class="bottomnav" aria-label="下部ナビ">${items.map(([v,ic,la])=>`<button class="${state.view===v?'active':''}" onclick="setView('${v}')"><span class="navicon">${ic}</span>${la}</button>`).join('')}</nav>`;}
+function frame(content,title='RICE NAVI'){document.getElementById('app').innerHTML=appTop(title)+`<main class="main">${content}</main>`+bottomNav();}
+function backBar(title){return `<div class="backbar"><button onclick="setView('home')">← ホームへ</button><h1 class="page-title">${esc(title)}</h1></div>`;}
+function currentFortune(){return DATA.fortunes[todayIndex(DATA.fortunes.length)];}
+function currentStory(){return DATA.stories[todayIndex(DATA.stories.length,10)];}
+function currentHistory(){return DATA.histories.find(h=>h.region===state.region) || DATA.histories[0];}
+function render(){ if(!DATA){document.getElementById('app').innerHTML='<p>読み込み中...</p>';return;} const routes={home:renderHome,meister:renderMeister,literature:renderLiterature,checks:renderChecks,status:renderStatus,stories:renderStories,future:renderFuture,varieties:renderVarieties,search:renderSearch,water:renderWater,environment:renderEnvironment,granary:renderGranary,glossary:renderGlossary}; (routes[state.view]||renderHome)(); }
+function renderHome(){const f=currentFortune(), h=currentHistory(), st=currentStory(); const html=`
+<section class="hero" aria-labelledby="fortune-title"><div class="fortune-grid"><div class="rice-illust" aria-hidden="true">🍚</div><div><h1 id="fortune-title">今日の米占い</h1><p><strong>${esc(f.title)}</strong></p><p>${esc(f.message)}</p><div class="mini-tags"><span class="mini-tag">ラッキー米：${esc(f.rice)}</span><span class="mini-tag">ラッキー工程：${esc(f.process)}</span></div><div class="button-row"><button class="secondary-btn" onclick="toggle('fortune')">${state.open.fortune?'閉じる':'詳しく見る'}</button></div></div></div>${state.open.fortune?`<div class="accordion-body"><p><strong>今日の一言：</strong>${esc(f.word)}</p><p class="small muted">占いはお楽しみ機能です。現場判断や診断には使わないでください。</p></div>`:''}</section>
+${homeCard('history','📍','現在地のお米ヒストリー','今いる場所のお米の歴史を表示する',`現在地：${state.region}`,true)}
+${state.open.history?`<div class="card"><h2>${esc(h.title)}</h2><p><strong>地域：${esc(h.region)}</strong></p><p>${esc(h.body)}</p><p class="notice small">${esc(h.note)}</p><div class="button-row"><select id="regionSel" aria-label="地域を変更">${DATA.histories.map(x=>`<option ${x.region===state.region?'selected':''}>${esc(x.region)}</option>`).join('')}</select><button class="secondary-btn" onclick="changeRegion()">地域を変更</button><button class="secondary-btn" onclick="toggle('history')">閉じる</button></div></div>`:''}
+${homeCard('story','🌏','世界のライス物語','今週のストーリーを読む',st.title,true)}
+${state.open.story?`<div class="card"><h2>今週のライス物語</h2><h3>${esc(st.title)}</h3><p>${esc(st.body)}</p><div class="button-row"><button class="primary-btn" onclick="setView('stories')">過去のストーリーを見る</button><button class="secondary-btn" onclick="toggle('story')">閉じる</button></div></div>`:''}
+${homeCard('literature','📚','炊飯文献ライブラリ','炊飯に関する文献・claimを整理する','RICE NAVIの信頼性の中心',false,'highlight')}
+${homeCard('meister','🎓','お米マイスター100','米の基本を100テーマで学ぶ','初級30・中級40・上級30',false)}
+${homeCard('varieties','🔎','米品種図鑑','世界と日本の米品種を調べる',`${DATA.varieties.length}件を表示`,false)}
+${homeCard('water','💧','水の相性チェック','pH、硬度、TDSなどから水と炊飯の関係を見る','入力して参考判定',false)}
+${homeCard('environment','🌡️','気温・湿度・保管環境チェック','米の保管・吸水・カビリスクを見る','入力して参考判定',false)}
+${homeCard('granary','🏚️','納米庫チェッカー','湿度、結露、残留米、カビ臭を確認する','即時停止条件あり',false)}
+${homeCard('future','🌱','お米の未来','これからの米づくり、技術、食文化を読む','タイトル一覧から選ぶ',false)}
+`;frame(html,'RICE NAVI');}
+function homeCard(view,icon,title,sub,extra,accordion=false,cls=''){let on=accordion?`toggle('${view==='history'?'history':'story'}')`:`setView('${view}')`;return `<section class="card ${cls}"><button class="tap-card" onclick="${on}" aria-expanded="${accordion?state.open[view==='history'?'history':'story']:false}"><div class="card-row"><div class="card-icon">${icon}</div><div><h2 class="card-title">${esc(title)}</h2><p class="card-sub">${esc(sub)}</p>${extra?`<p class="small muted">${esc(extra)}</p>`:''}</div><div class="chev">${accordion?(state.open[view==='history'?'history':'story']?'⌃':'⌄'):'›'}</div></div></button></section>`;}
+function changeRegion(){const sel=$('#regionSel'); if(sel){state.region=sel.value;localStorage.setItem('riceNaviRegion',state.region);renderHome();}}
+function renderMeister(){let levels=['初級','中級','上級'];let lessons=DATA.meister_lessons.filter(x=>x.level===state.lessonLevel);let l=lessons[state.lessonIndex]||lessons[0];let html=`${backBar('お米マイスター100')}<p class="section-caption">文献ページに急に飛ばず、1テーマずつ順番に学びます。</p><div class="tabs">${levels.map(lv=>`<button class="tab ${lv===state.lessonLevel?'active':''}" onclick="state.lessonLevel='${lv}';state.lessonIndex=0;renderMeister()">${lv}</button>`).join('')}</div><div class="card"><span class="badge">${esc(l.level)}</span><span class="badge">${l.no}/100</span><h2>${String(l.no).padStart(2,'0')}　${esc(l.title)}</h2><p>${esc(l.body)}</p><div class="notice ok"><strong>今日のポイント</strong><br>${esc(l.point)}</div><p class="small muted">${esc(l.root)}</p><div class="lesson-nav"><button class="secondary-btn" onclick="prevLesson()">← 前へ</button><button class="primary-btn" onclick="nextLesson()">次へ →</button></div><div class="button-row"><button class="secondary-btn" onclick="setView('literature')">詳しい根拠を見る</button><button class="secondary-btn" onclick="renderTempTable()">温度と時間の表を見る</button></div></div>`;frame(html,'お米マイスター100');}
+function prevLesson(){state.lessonIndex=Math.max(0,state.lessonIndex-1);renderMeister();}
+function nextLesson(){let lessons=DATA.meister_lessons.filter(x=>x.level===state.lessonLevel);state.lessonIndex=Math.min(lessons.length-1,state.lessonIndex+1);renderMeister();}
+function renderTempTable(){let rows=DATA.temperature_events.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('');let html=`${backBar('温度と時間の関係表')}<p>炊飯工程を、温度・時間・水分変化で見るための入口です。</p><table class="temp-table"><thead><tr><th>温度帯</th><th>米の変化</th><th>見るポイント</th></tr></thead><tbody>${rows}</tbody></table>`;frame(html,'温度と時間');}
+function litCategories(){return ['すべて',...Array.from(new Set(DATA.literature_cards.map(c=>c.category))).sort()];}
+function renderLiterature(){let cats=litCategories();let list=DATA.literature_cards.filter(c=>(state.litCat==='すべて'||c.category===state.litCat)&&(!state.litQuery||(`${c.title} ${c.short} ${c.terms}`).includes(state.litQuery)));let html=`${backBar('炊飯文献ライブラリ')}<p class="section-caption">カテゴリーを選び、最初はタイトルだけを読みます。詳細を開いたときだけclaim・条件・出典を表示します。</p><input class="searchbox" placeholder="文献カードを検索" value="${esc(state.litQuery)}" oninput="state.litQuery=this.value;renderLiterature()"><div class="category-bar">${cats.map(c=>`<button class="cat-btn ${c===state.litCat?'active':''}" onclick="state.litCat='${esc(c)}';renderLiterature()">${esc(c)}</button>`).join('')}</div><p class="small muted">表示：${list.length}件</p>${list.map((c,i)=>`<button class="list-button" onclick="openLit('${c.id}')"><span class="no">${i+1}.</span>${esc(c.title)}<br><span class="small muted">${esc(c.category)} / ${esc(c.status)}</span></button>`).join('')}<div id="litDetail"></div>`;frame(html,'文献ライブラリ');}
+function openLit(id){let c=DATA.literature_cards.find(x=>x.id===id);let html=`<div class="detail"><button class="secondary-btn" onclick="$('#litDetail').innerHTML=''">閉じる</button><h3>${esc(c.title)}</h3><p>${esc(c.easy||c.short)}</p><dl class="kv"><dt>カテゴリー</dt><dd>${esc(c.category)}</dd><dt>文献から言えること</dt><dd>${esc(c.short)}</dd><dt>数値・条件</dt><dd>${esc(c.numbers||'文献条件を確認してください。')}</dd><dt>現場で見るポイント</dt><dd>${esc(c.field||'水温・時間・米の状態を確認してください。')}</dd><dt>注意</dt><dd>${esc(c.warning||'文献条件と現場条件を混同しないでください。')}</dd><dt>claim</dt><dd>${tagList(c.claim_ids)}</dd><dt>出典</dt><dd>${tagList(c.source_ids)}</dd></dl></div>`;$('#litDetail').innerHTML=html;$('#litDetail').scrollIntoView({behavior:'smooth',block:'start'});}
+function tagList(s){return String(s||'').split(';').filter(Boolean).map(x=>`<span class="badge">${esc(x)}</span>`).join('')||'<span class="badge prep">未設定</span>';}
+function renderStories(){let html=`${backBar('世界のライス物語')}<p class="section-caption">週1ストーリー形式。過去のストーリーも一覧で読めます。</p>${DATA.stories.map(s=>`<button class="list-button" onclick="openStory('${s.id}')"><span class="no">${s.week}週</span>${esc(s.title)}<br><span class="small muted">${esc(s.summary)}</span></button>`).join('')}<div id="storyDetail"></div>`;frame(html,'世界のライス物語');}
+function openStory(id){let s=DATA.stories.find(x=>x.id===id);$('#storyDetail').innerHTML=`<div class="detail"><button class="secondary-btn" onclick="$('#storyDetail').innerHTML=''">閉じる</button><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p><p class="small muted">関連：${esc(s.related)}</p></div>`;$('#storyDetail').scrollIntoView({behavior:'smooth'});}
+function renderFuture(){let html=`${backBar('お米の未来')}<p class="section-caption">タイトル一覧から読みたいものを選びます。空想ではなく、研究・政策・社会課題に沿った読み物です。</p>${DATA.future.map(item=>`<button class="list-button" onclick="openFuture('${item.future_id}')"><span class="badge">${esc(item.category)}</span>${esc(item.title_ja)}<br><span class="small muted">${esc(item.subtitle_ja||'')}</span></button>`).join('')}<div id="futureDetail"></div>`;frame(html,'お米の未来');}
+function openFuture(id){let x=DATA.future.find(i=>i.future_id===id);$('#futureDetail').innerHTML=`<div class="detail"><button class="secondary-btn" onclick="$('#futureDetail').innerHTML=''">閉じる</button><h3>${esc(x.title_ja)}</h3><p><strong>${esc(x.subtitle_ja||'')}</strong></p><p>${esc(x.body_ja)}</p><p class="small muted">出典メモ：${esc(x.source_note||'研究・公的資料を確認')}</p></div>`;$('#futureDetail').scrollIntoView({behavior:'smooth'});}
+function renderVarieties(){let q=state.varietyQuery;let list=DATA.varieties.filter(v=>!q || `${v.name} ${v.region} ${v.lineage} ${v.use}`.includes(q));let html=`${backBar('米品種図鑑')}<p class="section-caption">空画面にはせず、確認済みでない数値は「未確認」と表示します。一般参考値は入れません。</p><input class="searchbox" placeholder="品種名・地域・用途で検索" value="${esc(q)}" oninput="state.varietyQuery=this.value;renderVarieties()">${list.map(v=>`<button class="list-button" onclick="openVariety('${v.id}')"><strong>${esc(v.name)}</strong><br><span class="small muted">${esc(v.region)} / ${esc(v.lineage)} / ${esc(v.use)}</span></button>`).join('')}<div id="varietyDetail"></div>`;frame(html,'米品種図鑑');}
+function openVariety(id){let v=DATA.varieties.find(x=>x.id===id);$('#varietyDetail').innerHTML=`<div class="detail"><button class="secondary-btn" onclick="$('#varietyDetail').innerHTML=''">閉じる</button><h3>${esc(v.name)}</h3><dl class="kv"><dt>国・地域</dt><dd>${esc(v.region)}</dd><dt>系統</dt><dd>${esc(v.lineage)}</dd><dt>粒形</dt><dd>${esc(v.grain_shape)}</dd><dt>アミロース</dt><dd>${esc(v.amylose)}</dd><dt>たんぱく質</dt><dd>${esc(v.protein)}</dd><dt>食味・食感</dt><dd>${esc(v.texture)}</dd><dt>主な用途</dt><dd>${esc(v.use)}</dd><dt>注意</dt><dd>${esc(v.note)}</dd></dl></div>`;$('#varietyDetail').scrollIntoView({behavior:'smooth'});}
+function renderChecks(){let html=`${backBar('チェック')}<p class="section-caption">入力値から参考判定を表示します。実測値ではない場合は断定しません。</p>${checkCard('water','💧','水の相性チェック','pH、硬度、TDSなどを見る')}${checkCard('environment','🌡️','気温・湿度・保管環境チェック','温度・湿度から保管注意を見る')}${checkCard('granary','🏚️','納米庫チェッカー','結露・残留米・カビ臭などを確認')}`;frame(html,'チェック');}
+function checkCard(view,icon,title,sub){return `<section class="card"><button class="tap-card" onclick="setView('${view}')"><div class="card-row"><div class="card-icon">${icon}</div><div><h2 class="card-title">${title}</h2><p class="card-sub">${sub}</p></div><div class="chev">›</div></div></button></section>`;}
+function renderWater(){let html=`${backBar('水の相性チェック')}<p>${DATA.water_notes.intro}</p><p class="notice small">${DATA.water_notes.caution}</p><div class="card form-grid"><div class="field"><label>pH</label><input id="ph" type="number" step="0.1" value="7.2"></div><div class="field"><label>硬度 mg/L</label><input id="hardness" type="number" value="80"></div><div class="field"><label>TDS mg/L</label><input id="tds" type="number" value="180"></div><div class="field"><label>残留塩素 mg/L</label><input id="chlorine" type="number" step="0.1" value="0.3"></div><button class="primary-btn" onclick="judgeWater()">判定する</button></div><div id="waterResult"></div>`;frame(html,'水の相性');}
+function judgeWater(){let ph=+$('#ph').value, hard=+$('#hardness').value, tds=+$('#tds').value, cl=+$('#chlorine').value;let msg=[],level='ok'; if(ph<6.5||ph>8.5){msg.push('pHが一般的な中性域から外れています。炊飯や設備条件への影響を確認してください。'); level='notice';} if(hard>120){msg.push('硬度が高めです。炊飯への影響だけでなく、配管・ノズルの付着リスクも確認してください。'); level='notice';} if(tds>300){msg.push('TDSが高めです。地域参考値か実測値かを確認してください。'); level='notice';} if(cl>1){msg.push('残留塩素が高めです。におい・処理水条件を確認してください。'); level='notice';} if(!msg.length) msg.push('入力値だけを見ると大きな注意はありません。ただし水質は配管・貯水槽・処理水で変わります。'); $('#waterResult').innerHTML=`<div class="card ${level==='ok'?'ok':'notice'}"><strong>参考判定</strong><p>${msg.map(esc).join('<br>')}</p><p class="small">次に見る項目：浸漬水温、加水量、配管・ノズルの状態</p></div>`;}
+function renderEnvironment(){let html=`${backBar('気温・湿度・保管環境チェック')}<p>天気アプリではなく、米の保管と炊飯前条件を見るための機能です。</p><div class="card form-grid"><div class="field"><label>外気温 ℃</label><input id="ot" type="number" value="30"></div><div class="field"><label>室内温度 ℃</label><input id="it" type="number" value="28"></div><div class="field"><label>湿度 %</label><input id="rh" type="number" value="78"></div><div class="field"><label>米温 ℃</label><input id="rt" type="number" value="27"></div><button class="primary-btn" onclick="judgeEnv()">判定する</button></div><div id="envResult"></div>`;frame(html,'環境チェック');}
+function judgeEnv(){let ot=+$('#ot').value,it=+$('#it').value,rh=+$('#rh').value,rt=+$('#rt').value;let msg=[],danger=false;if(rh>=70){msg.push('湿度が高めです。結露・カビ・虫害リスクを確認してください。');}if(it>=30||ot>=30){msg.push('高温域です。米の保管場所、直射日光、残留米の有無を確認してください。');}if(Math.abs(ot-it)>=10||Math.abs(it-rt)>=8){msg.push('温度差があります。結露の有無を確認してください。');}if(!msg.length)msg.push('大きな注意はありません。記録を残すと変化に気づきやすくなります。');$('#envResult').innerHTML=`<div class="card notice"><strong>参考判定</strong><p>${msg.map(esc).join('<br>')}</p><p class="small">次に見る項目：納米庫チェッカー、米水分、清掃日</p></div>`;}
+function renderGranary(){let html=`${backBar('納米庫チェッカー')}<p>納米庫の湿度・結露・残留米・カビ臭などを確認します。</p><div class="card form-grid"><div class="field"><label>庫内温度 ℃</label><input id="gt" type="number" value="26"></div><div class="field"><label>庫内湿度 %</label><input id="gh" type="number" value="65"></div><div class="field"><label>前回清掃からの日数</label><input id="cleanDays" type="number" value="3"></div></div><div class="card"><label class="checkline"><input type="checkbox" id="condensation">結露・水濡れがある</label><label class="checkline"><input type="checkbox" id="residue">残留米・米くずがある</label><label class="checkline"><input type="checkbox" id="odor">カビ臭がある</label><label class="checkline"><input type="checkbox" id="visibleMold">目視カビがある</label><label class="checkline"><input type="checkbox" id="insects">虫の大量発生がある</label><button class="primary-btn" onclick="judgeGranary()">判定する</button></div><div id="granaryResult"></div>`;frame(html,'納米庫チェッカー');}
+function judgeGranary(){let stop=$('#odor').checked||$('#visibleMold').checked||$('#insects').checked;let msg=[];if(stop){msg.push('使用停止・隔離・品質管理確認を行ってください。炊飯条件の調整対象ではありません。')}else{if($('#condensation').checked)msg.push('結露があります。原因確認、清掃、乾燥を行ってください。'); if($('#residue').checked)msg.push('残留米があります。次ロットに混ぜず、排出口・角部を清掃してください。'); if(+$('#gh').value>=70)msg.push('湿度が70%以上です。結露・カビに注意してください。'); if(+$('#cleanDays').value>7)msg.push('清掃間隔が長くなっています。清掃記録を確認してください。'); if(!msg.length)msg.push('大きな異常はありません。温度・湿度・清掃記録を継続してください。');}
+$('#granaryResult').innerHTML=`<div class="card ${stop?'danger':'notice'}"><strong>${stop?'即時停止条件':'参考判定'}</strong><p>${msg.map(esc).join('<br>')}</p></div>`;}
+function renderGlossary(){let entries=[];let g=DATA.glossary;if(Array.isArray(g)){entries=g.map(x=>({term:x.ja||x.term_ja||x.term||'',desc:x.en||x.zh_tw||''}));}else if(g.terms){entries=g.terms.map(x=>({term:x.ja||x.term_ja||x.term||'',desc:x.en||''}));}else{entries=[{term:'吸水',desc:'米が水を取り込むこと'},{term:'糊化',desc:'でんぷんが加熱と水で変化すること'}];}let html=`${backBar('用語集')}<p class="section-caption">専門語を短く確認します。</p>${entries.slice(0,80).map(e=>`<div class="card"><h2 class="card-title">${esc(e.term)}</h2><p class="small muted">${esc(e.desc)}</p></div>`).join('')}`;frame(html,'用語集');}
+function renderSearch(){let html=`${backBar('検索')}<input class="searchbox" id="q" placeholder="米、吸水、温度、品種など" oninput="doSearch()"><div id="searchResult"></div>`;frame(html,'検索');}
+function doSearch(){let q=$('#q').value.trim(); if(!q){$('#searchResult').innerHTML='';return;}let results=[];DATA.meister_lessons.filter(x=>`${x.title} ${x.body}`.includes(q)).slice(0,8).forEach(x=>results.push(['お米マイスター100',x.title,()=>{state.lessonLevel=x.level;state.lessonIndex=DATA.meister_lessons.filter(y=>y.level===x.level).findIndex(y=>y.id===x.id);setView('meister')} ]));DATA.literature_cards.filter(x=>`${x.title} ${x.short} ${x.terms}`.includes(q)).slice(0,8).forEach(x=>results.push(['炊飯文献ライブラリ',x.title,()=>{state.litQuery=q;setView('literature')} ]));DATA.varieties.filter(x=>`${x.name} ${x.region}`.includes(q)).slice(0,5).forEach(x=>results.push(['米品種図鑑',x.name,()=>{state.varietyQuery=q;setView('varieties')} ]));$('#searchResult').innerHTML=results.length?results.map((r,i)=>`<button class="list-button" id="sr${i}"><span class="badge">${esc(r[0])}</span>${esc(r[1])}</button>`).join(''):'<div class="card">該当する項目が見つかりませんでした。</div>';results.forEach((r,i)=>{$('#sr'+i).onclick=r[2]});}
+function renderStatus(){let html=`${backBar('統合状況')}<div class="card"><h2>v12 ユニバーサルデザイン版</h2><p>空画面・戻れない画面・横幅バグを避け、まず日本語版で使える体験を優先しています。</p><dl class="kv"><dt>米占い</dt><dd>${DATA.fortunes.length}件</dd><dt>お米ヒストリー</dt><dd>${DATA.histories.length}地域</dd><dt>ライス物語</dt><dd>${DATA.stories.length}週分</dd><dt>お米の未来</dt><dd>${DATA.future.length}件</dd><dt>文献カード</dt><dd>${DATA.literature_cards.length}件</dd><dt>マイスター</dt><dd>${DATA.meister_lessons.length}件</dd><dt>米品種図鑑</dt><dd>${DATA.varieties.length}件</dd></dl></div><div class="card"><h2>ユニバーサルデザイン方針</h2><p>大きめ文字、大きめボタン、明確な戻る導線、横スクロールなし、準備中の空表示なしを基本にしています。</p></div>`;frame(html,'統合状況');}
 init();
