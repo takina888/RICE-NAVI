@@ -1,0 +1,222 @@
+[
+  {
+    "rule_id": "MOLD-R01",
+    "rule_type": "即時停止",
+    "condition_ja": "目視カビあり",
+    "input_field": "",
+    "threshold": "",
+    "risk_level": "使用停止・隔離",
+    "score": "100",
+    "message_ja": "炊飯条件で解決しない。使用せず品質管理へ。",
+    "claim_ids": "MOLD007;MOLD008;MOLD017"
+  },
+  {
+    "rule_id": "MOLD-R02",
+    "rule_type": "即時停止",
+    "condition_ja": "カビ臭あり",
+    "input_field": "",
+    "threshold": "",
+    "risk_level": "使用停止・隔離",
+    "score": "100",
+    "message_ja": "カビ臭がある米は使用せず隔離。",
+    "claim_ids": "MOLD007;MOLD008;MOLD017"
+  },
+  {
+    "rule_id": "MOLD-R03",
+    "rule_type": "即時停止",
+    "condition_ja": "米表面の濡れ・固着あり",
+    "input_field": "",
+    "threshold": "",
+    "risk_level": "使用停止・確認",
+    "score": "90",
+    "message_ja": "結露・水濡れ・固着はカビ発生前後の重要兆候。",
+    "claim_ids": "MOLD006"
+  },
+  {
+    "rule_id": "MOLD-R04",
+    "rule_type": "高リスク",
+    "condition_ja": "庫内湿度 >= 70%",
+    "input_field": "humidity_pct",
+    "threshold": ">=70",
+    "risk_level": "高リスク",
+    "score": "25",
+    "message_ja": "結露・カビ・ダニ注意。換気/除湿/清掃を確認。",
+    "claim_ids": "MOLD002"
+  },
+  {
+    "rule_id": "MOLD-R05",
+    "rule_type": "注意",
+    "condition_ja": "庫内湿度 65〜69%",
+    "input_field": "humidity_pct",
+    "threshold": "65-69",
+    "risk_level": "注意",
+    "score": "10",
+    "message_ja": "70%未満でも結露・残留米と組み合わせて注意。",
+    "claim_ids": "MOLD002;MOLD003"
+  },
+  {
+    "rule_id": "MOLD-R06",
+    "rule_type": "注意",
+    "condition_ja": "庫内温度 20〜30℃",
+    "input_field": "bin_temp_c",
+    "threshold": "20-30",
+    "risk_level": "注意",
+    "score": "10",
+    "message_ja": "多くのカビが増えやすい温度帯。湿度・水分とセットで判定。",
+    "claim_ids": "MOLD001"
+  },
+  {
+    "rule_id": "MOLD-R07",
+    "rule_type": "高リスク",
+    "condition_ja": "庫内温度20〜30℃ かつ 湿度70%以上",
+    "input_field": "bin_temp_c+humidity_pct",
+    "threshold": "20-30 and >=70",
+    "risk_level": "高リスク",
+    "score": "35",
+    "message_ja": "温度・湿度が重なるため重点確認。",
+    "claim_ids": "MOLD001;MOLD002"
+  },
+  {
+    "rule_id": "MOLD-R08",
+    "rule_type": "高リスク",
+    "condition_ja": "結露あり",
+    "input_field": "condensation",
+    "threshold": "true",
+    "risk_level": "高リスク",
+    "score": "35",
+    "message_ja": "内壁・天井・米表面の露を確認。",
+    "claim_ids": "MOLD006;MOLD015"
+  },
+  {
+    "rule_id": "MOLD-R09",
+    "rule_type": "注意",
+    "condition_ja": "外気温と庫内/米温差 > 10℃",
+    "input_field": "temp_difference_c",
+    "threshold": ">10",
+    "risk_level": "結露注意",
+    "score": "15",
+    "message_ja": "温度差による結露に注意。",
+    "claim_ids": "MOLD015"
+  },
+  {
+    "rule_id": "MOLD-R10",
+    "rule_type": "高リスク",
+    "condition_ja": "残留米あり",
+    "input_field": "residual_rice",
+    "threshold": "true",
+    "risk_level": "高リスク",
+    "score": "30",
+    "message_ja": "排出口・角部・センサー周辺を清掃。",
+    "claim_ids": "MOLD011;MOLD013"
+  },
+  {
+    "rule_id": "MOLD-R11",
+    "rule_type": "高リスク",
+    "condition_ja": "長期残留米の疑い",
+    "input_field": "long_residue",
+    "threshold": "true",
+    "risk_level": "高リスク",
+    "score": "40",
+    "message_ja": "次ロットに混ぜず、清掃・隔離。",
+    "claim_ids": "MOLD013"
+  },
+  {
+    "rule_id": "MOLD-R12",
+    "rule_type": "注意",
+    "condition_ja": "清掃履歴なし/前回清掃日不明",
+    "input_field": "cleaning_record",
+    "threshold": "missing",
+    "risk_level": "注意",
+    "score": "10",
+    "message_ja": "管理不十分。清掃記録を残す。",
+    "claim_ids": "MOLD010;MOLD012"
+  },
+  {
+    "rule_id": "MOLD-R13",
+    "rule_type": "高リスク",
+    "condition_ja": "前回清掃から長期間経過",
+    "input_field": "days_since_cleaning",
+    "threshold": ">=7",
+    "risk_level": "高リスク",
+    "score": "20",
+    "message_ja": "日数閾値は社内基準で変更可。",
+    "claim_ids": "MOLD010;MOLD012"
+  },
+  {
+    "rule_id": "MOLD-R14",
+    "rule_type": "高リスク",
+    "condition_ja": "玄米水分 > 15.0%",
+    "input_field": "brown_rice_moisture_pct",
+    "threshold": ">15.0",
+    "risk_level": "高リスク",
+    "score": "25",
+    "message_ja": "常温貯蔵リスク上昇。",
+    "claim_ids": "MOLD004"
+  },
+  {
+    "rule_id": "MOLD-R15",
+    "rule_type": "高リスク",
+    "condition_ja": "籾米水分 > 14.5%",
+    "input_field": "paddy_moisture_pct",
+    "threshold": ">14.5",
+    "risk_level": "高リスク",
+    "score": "25",
+    "message_ja": "常温貯蔵リスク上昇。",
+    "claim_ids": "MOLD004"
+  },
+  {
+    "rule_id": "MOLD-R16",
+    "rule_type": "注意",
+    "condition_ja": "水分計未確認",
+    "input_field": "moisture_measured",
+    "threshold": "false",
+    "risk_level": "注意",
+    "score": "10",
+    "message_ja": "水分値がない場合は判定信頼度を下げる。",
+    "claim_ids": "MOLD004"
+  },
+  {
+    "rule_id": "MOLD-R17",
+    "rule_type": "注意",
+    "condition_ja": "虫あり",
+    "input_field": "insects",
+    "threshold": "true",
+    "risk_level": "注意/高リスク",
+    "score": "15",
+    "message_ja": "虫害・カビ・ダニリスクの可能性。発生量で判定。",
+    "claim_ids": "MOLD002"
+  },
+  {
+    "rule_id": "MOLD-R18",
+    "rule_type": "注意",
+    "condition_ja": "床落ち米/こぼれ米あり",
+    "input_field": "spilled_rice",
+    "threshold": "true",
+    "risk_level": "注意",
+    "score": "15",
+    "message_ja": "納米庫へ戻さず廃棄/隔離。",
+    "claim_ids": "MOLD009"
+  },
+  {
+    "rule_id": "MOLD-R19",
+    "rule_type": "注意",
+    "condition_ja": "搬送ライン・昇降機に残留あり",
+    "input_field": "conveyor_residue",
+    "threshold": "true",
+    "risk_level": "高リスク",
+    "score": "25",
+    "message_ja": "前後工程も清掃対象。",
+    "claim_ids": "MOLD013;MOLD016"
+  },
+  {
+    "rule_id": "MOLD-R20",
+    "rule_type": "注意",
+    "condition_ja": "高温多湿地域/季節",
+    "input_field": "hot_humid_season",
+    "threshold": "true",
+    "risk_level": "注意",
+    "score": "5",
+    "message_ja": "台湾など高温多湿環境では温湿度履歴を重視。",
+    "claim_ids": "MOLD018"
+  }
+]

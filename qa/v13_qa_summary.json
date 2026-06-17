@@ -1,0 +1,24 @@
+{
+  "version": "v13_source_rebuild",
+  "counts": {
+    "future": 50,
+    "learning_cards": 82,
+    "process_claims": 235,
+    "water_claims": 17,
+    "mold_claims": 18,
+    "meister": 100,
+    "stories": 52,
+    "varieties": 8
+  },
+  "checks": {
+    "no_bottom_status": true,
+    "meister_100": true,
+    "future_50": true,
+    "source_files_used": [
+      "tmp_RICE_NAVI_future_rice_50_LATEST.xlsx",
+      "tmp_RICE_NAVI_water_check_storage_mold_v1_0.xlsx",
+      "RICE_NAVI_learning_cards_v82.xlsx",
+      "RICE_WORKS_v75_2_batch10_process_core_integrated.xlsx"
+    ]
+  }
+}

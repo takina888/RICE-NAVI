@@ -1,0 +1,110 @@
+[
+  {
+    "check_id": "CHK001",
+    "timing": "毎ロット前",
+    "check_area": "点検口・ふた・天井部",
+    "check_item": "水滴・露・濡れ跡がないか",
+    "method": "目視",
+    "action_if_ng": "ありなら使用停止/乾燥/確認",
+    "claim_ids": "MOLD006;MOLD015"
+  },
+  {
+    "check_id": "CHK002",
+    "timing": "毎ロット前",
+    "check_area": "内壁",
+    "check_item": "結露跡・付着米・変色がないか",
+    "method": "目視/写真",
+    "action_if_ng": "ありなら清掃・原因確認",
+    "claim_ids": "MOLD006"
+  },
+  {
+    "check_id": "CHK003",
+    "timing": "毎ロット前",
+    "check_area": "排出口",
+    "check_item": "残留米・固着米・粉だまりがないか",
+    "method": "目視/手入れ可否",
+    "action_if_ng": "残留米は次ロットへ混ぜない",
+    "claim_ids": "MOLD011;MOLD013"
+  },
+  {
+    "check_id": "CHK004",
+    "timing": "毎ロット前",
+    "check_area": "センサー/レベル計周辺",
+    "check_item": "米粉・米粒の付着がないか",
+    "method": "目視",
+    "action_if_ng": "付着があれば清掃",
+    "claim_ids": "MOLD011"
+  },
+  {
+    "check_id": "CHK005",
+    "timing": "毎日",
+    "check_area": "庫内温度・湿度",
+    "check_item": "温度20〜30℃、湿度70%以上の組み合わせ",
+    "method": "計測",
+    "action_if_ng": "高リスク表示",
+    "claim_ids": "MOLD001;MOLD002"
+  },
+  {
+    "check_id": "CHK006",
+    "timing": "毎日",
+    "check_area": "米温",
+    "check_item": "上昇傾向がないか",
+    "method": "温度計/記録",
+    "action_if_ng": "上昇時は原因確認",
+    "claim_ids": "MOLD014"
+  },
+  {
+    "check_id": "CHK007",
+    "timing": "入荷/投入時",
+    "check_area": "米水分",
+    "check_item": "玄米15.0%以下/籾14.5%以下など基準内か",
+    "method": "水分計",
+    "action_if_ng": "基準超えは保管条件確認",
+    "claim_ids": "MOLD004"
+  },
+  {
+    "check_id": "CHK008",
+    "timing": "毎日",
+    "check_area": "臭い",
+    "check_item": "カビ臭・異臭がないか",
+    "method": "官能確認",
+    "action_if_ng": "ありなら使用停止・隔離",
+    "claim_ids": "MOLD007;MOLD008"
+  },
+  {
+    "check_id": "CHK009",
+    "timing": "毎日",
+    "check_area": "目視カビ",
+    "check_item": "白・青・黒・緑などのカビ様付着がないか",
+    "method": "目視/写真",
+    "action_if_ng": "ありなら使用停止・隔離",
+    "claim_ids": "MOLD007;MOLD008;MOLD017"
+  },
+  {
+    "check_id": "CHK010",
+    "timing": "清掃時",
+    "check_area": "床/周辺",
+    "check_item": "こぼれ米・ほこり・米くずがないか",
+    "method": "目視/清掃記録",
+    "action_if_ng": "回収米を戻さない",
+    "claim_ids": "MOLD009"
+  },
+  {
+    "check_id": "CHK011",
+    "timing": "清掃時",
+    "check_area": "搬送ライン接続部",
+    "check_item": "昇降機・投入配管・スクリュー周辺に残留がないか",
+    "method": "目視/分解点検",
+    "action_if_ng": "残留は清掃・空運転",
+    "claim_ids": "MOLD013;MOLD016"
+  },
+  {
+    "check_id": "CHK012",
+    "timing": "異常時",
+    "check_area": "隔離判断",
+    "check_item": "問題米を他米と分けたか",
+    "method": "記録",
+    "action_if_ng": "品質管理へ連絡",
+    "claim_ids": "MOLD008;MOLD017"
+  }
+]

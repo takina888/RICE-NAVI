@@ -1,0 +1,1043 @@
+[
+  {
+    "id": "TEMP_EVENT_001",
+    "summary": "0 / 5 / 浸漬前/低温水",
+    "record": {
+      "event_id": "TEMP_EVENT_001",
+      "temperature_min_c": 0,
+      "temperature_max_c": 5,
+      "stage": "浸漬前/低温水",
+      "rice_change_event": "低温水では吸水速度が遅く、短時間では吸水不足になりやすい。",
+      "process_meaning": "低温浸漬は時間設計とセットで扱う。",
+      "risk_if_insufficient": "中心部への吸水不足、加熱時の芯残りリスク。",
+      "risk_if_excessive": "長時間化により工程時間が伸びる。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_001",
+      "boundary_note": "水温による吸水差は公的資料の一般説明。温度を現場基準値にしない。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_002",
+    "summary": "5 / 10 / 低温浸漬",
+    "record": {
+      "event_id": "TEMP_EVENT_002",
+      "temperature_min_c": 5,
+      "temperature_max_c": 10,
+      "stage": "低温浸漬",
+      "rice_change_event": "5〜50℃実験では低温側でも時間経過により吸水が進む。平衡時には温水より低温浸漬の吸水率が高い現象が報告される。",
+      "process_meaning": "短時間だけでなく到達吸水量も見る必要がある。",
+      "risk_if_insufficient": "短時間浸漬では不足しやすい。",
+      "risk_if_excessive": "過度な長時間浸漬は工程停滞・管理負荷。",
+      "cardization_priority": "A",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_002",
+      "claim_id": "CLM_TEMP_002",
+      "boundary_note": "5〜240分、洗米なし等の条件に限定。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_003",
+    "summary": "10 / 15 / 保存/冷飯",
+    "record": {
+      "event_id": "TEMP_EVENT_003",
+      "temperature_min_c": 10,
+      "temperature_max_c": 15,
+      "stage": "保存/冷飯",
+      "rice_change_event": "米飯保存では10℃付近で硬さ・付着性など老化変化が問題になりやすい。",
+      "process_meaning": "炊飯後品質管理、冷飯・弁当設計に関係。",
+      "risk_if_insufficient": "温度帯を理解しないと硬化原因の切り分けが曖昧になる。",
+      "risk_if_excessive": "炊飯工程内温度管理ではなく保存工程の話になる。",
+      "cardization_priority": "B",
+      "status": "formal",
+      "source_id": "SRC_TEMP_006",
+      "claim_id": "CLM_TEMP_003",
+      "boundary_note": "保存温度claim。炊飯加熱工程内claimとは分ける。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_004",
+    "summary": "15 / 30 / 常温浸漬",
+    "record": {
+      "event_id": "TEMP_EVENT_004",
+      "temperature_min_c": 15,
+      "temperature_max_c": 30,
+      "stage": "常温浸漬",
+      "rice_change_event": "水温30℃は5℃より吸水率が高く、短時間で飽和吸水に達しやすい。30℃以下のうるち米の吸水率は20〜25%程度。",
+      "process_meaning": "浸漬水温と時間を同時に見る。",
+      "risk_if_insufficient": "低水温時に同じ時間では吸水不足になり得る。",
+      "risk_if_excessive": "高水温で長時間浸漬すると食味低下や腐敗注意。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_004",
+      "boundary_note": "うるち米・30℃以下の一般説明。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_005",
+    "summary": "20 / 30 / 浸漬初期",
+    "record": {
+      "event_id": "TEMP_EVENT_005",
+      "temperature_min_c": 20,
+      "temperature_max_c": 30,
+      "stage": "浸漬初期",
+      "rice_change_event": "浸漬後30分間は吸水が急速に進む。",
+      "process_meaning": "最低浸漬時間・短時間調整の根拠になる。",
+      "risk_if_insufficient": "30分未満では吸水不足の確認が必要。",
+      "risk_if_excessive": "長くしても比例して吸水し続けるわけではない。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_005",
+      "boundary_note": "農水省資料の一般工程説明。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_006",
+    "summary": "20 / 30 / 浸漬平衡",
+    "record": {
+      "event_id": "TEMP_EVENT_006",
+      "temperature_min_c": 20,
+      "temperature_max_c": 30,
+      "stage": "浸漬平衡",
+      "rice_change_event": "浸漬は約2時間でほぼ飽和状態とされ、1〜2時間が適当、最低30分できれば60分が必要とされる。",
+      "process_meaning": "浸漬時間の上限感を理解する。",
+      "risk_if_insufficient": "不足時は芯残り・糊化不足に関係。",
+      "risk_if_excessive": "長すぎると表層崩れ・食味低下要因。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_006",
+      "boundary_note": "具体時間は資料条件の一般値として扱う。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_007",
+    "summary": "40 / 50 / 温水浸漬",
+    "record": {
+      "event_id": "TEMP_EVENT_007",
+      "temperature_min_c": 40,
+      "temperature_max_c": 50,
+      "stage": "温水浸漬",
+      "rice_change_event": "40℃・50℃の温水浸漬では浸漬液中に固形分が多く懸濁した。",
+      "process_meaning": "温水で早く吸水するだけでなく、溶出・表層状態も見る。",
+      "risk_if_insufficient": "短時間化だけに注目すると米粒変化を見落とす。",
+      "risk_if_excessive": "高温浸漬側では品質変化の可能性。",
+      "cardization_priority": "A",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_002",
+      "claim_id": "CLM_TEMP_007",
+      "boundary_note": "実験条件限定。工程採用には現場試験が必要。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_008",
+    "summary": "50 / 60 / 糊化前後",
+    "record": {
+      "event_id": "TEMP_EVENT_008",
+      "temperature_min_c": 50,
+      "temperature_max_c": 60,
+      "stage": "糊化前後",
+      "rice_change_event": "60℃以上で米でんぷんの糊化がゆるやかに始まる。",
+      "process_meaning": "吸水工程から糊化工程へ移る境界帯。",
+      "risk_if_insufficient": "吸水不足のままこの帯に入ると中心部への水浸透・熱伝導が妨げられ芯の原因になり得る。",
+      "risk_if_excessive": "長時間この帯に置くと意図しない変化が進む可能性。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_008",
+      "boundary_note": "温度帯は糊化開始理解用。品種・水分で変わる。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_009",
+    "summary": "60 / 65 / 糊化進行",
+    "record": {
+      "event_id": "TEMP_EVENT_009",
+      "temperature_min_c": 60,
+      "temperature_max_c": 65,
+      "stage": "糊化進行",
+      "rice_change_event": "米は糊化に必要な水分を吸水しながら加熱される。中心部まで吸水・糊化させる必要がある。",
+      "process_meaning": "温度だけでなく水分分布が重要。",
+      "risk_if_insufficient": "表層だけ先に糊化して中心部が残る。",
+      "risk_if_excessive": "温度保持だけで解決できない場合がある。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_003",
+      "claim_id": "CLM_TEMP_009",
+      "boundary_note": "調理性研究の一般説明。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_010",
+    "summary": "65 / 70 / 高温浸漬/糊化帯",
+    "record": {
+      "event_id": "TEMP_EVENT_010",
+      "temperature_min_c": 65,
+      "temperature_max_c": 70,
+      "stage": "高温浸漬/糊化帯",
+      "rice_change_event": "65℃以上の長時間浸漬では、飯粒表層の粘り・付着性の著しい低下が報告される。",
+      "process_meaning": "65℃以上を浸漬条件として扱う場合は品質変化リスクを明記する。",
+      "risk_if_insufficient": "加熱前処理のつもりが表層物性を変える。",
+      "risk_if_excessive": "粘り低下、粒感低下、不均一感、粉っぽさの評価につながる。",
+      "cardization_priority": "A",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_004",
+      "claim_id": "CLM_TEMP_010",
+      "boundary_note": "65℃以上、2〜4時間等の研究条件限定。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_011",
+    "summary": "70 / 75 / 高温浸漬/表層変化",
+    "record": {
+      "event_id": "TEMP_EVENT_011",
+      "temperature_min_c": 70,
+      "temperature_max_c": 75,
+      "stage": "高温浸漬/表層変化",
+      "rice_change_event": "75℃浸漬でも粘りの低さが有意に認められた。",
+      "process_meaning": "高温浸漬は単なる時短ではない。",
+      "risk_if_insufficient": "表層物性低下を見落とす。",
+      "risk_if_excessive": "高温前処理により米飯食感が崩れる可能性。",
+      "cardization_priority": "B",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_004",
+      "claim_id": "CLM_TEMP_011",
+      "boundary_note": "高温浸漬研究条件のみ。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_012",
+    "summary": "75 / 90 / 高温浸漬/前処理",
+    "record": {
+      "event_id": "TEMP_EVENT_012",
+      "temperature_min_c": 75,
+      "temperature_max_c": 90,
+      "stage": "高温浸漬/前処理",
+      "rice_change_event": "75℃以上の浸漬では2時間、65℃では4時間が表層粘り・付着性の最低値で、それ以上の時間延長で変化は見られなかった。",
+      "process_meaning": "温度×時間の飽和的な物性変化を説明できる。",
+      "risk_if_insufficient": "温度だけ見て時間を見ないと誤判断。",
+      "risk_if_excessive": "長時間高温処理による食感低下。",
+      "cardization_priority": "B",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_004",
+      "claim_id": "CLM_TEMP_012",
+      "boundary_note": "実験条件限定。現場基準化不可。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_013",
+    "summary": "80 / 90 / 加熱後半",
+    "record": {
+      "event_id": "TEMP_EVENT_013",
+      "temperature_min_c": 80,
+      "temperature_max_c": 90,
+      "stage": "加熱後半",
+      "rice_change_event": "糊化は進むが、米粒中心部までの水分・熱の到達が重要。",
+      "process_meaning": "沸騰前後の保持不足を説明する中間帯。",
+      "risk_if_insufficient": "中心部の不均一・芯残り。",
+      "risk_if_excessive": "過加熱時は水分過多・表層崩れの確認。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_003",
+      "claim_id": "CLM_TEMP_013",
+      "boundary_note": "温度帯は工程理解用の整理。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_014",
+    "summary": "90 / 93 / 高温保持/粘度測定",
+    "record": {
+      "event_id": "TEMP_EVENT_014",
+      "temperature_min_c": 90,
+      "temperature_max_c": 93,
+      "stage": "高温保持/粘度測定",
+      "rice_change_event": "RVA測定では加熱に伴い粘度が上昇し、93℃保持後に膨潤糊化した澱粉粒が攪拌で破裂し粘度低下が生じる。",
+      "process_meaning": "糊化・膨潤・破裂・冷却老化の概念理解に使う。",
+      "risk_if_insufficient": "米飯粒と米粉懸濁液の違いを混同する。",
+      "risk_if_excessive": "測定条件を現場炊飯条件と誤用する。",
+      "cardization_priority": "C",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_007",
+      "claim_id": "CLM_TEMP_014",
+      "boundary_note": "米粉懸濁液RVAの説明。カード本文では測定法として扱う。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_015",
+    "summary": "98 / 100 / 炊飯高温保持",
+    "record": {
+      "event_id": "TEMP_EVENT_015",
+      "temperature_min_c": 98,
+      "temperature_max_c": 100,
+      "stage": "炊飯高温保持",
+      "rice_change_event": "98℃以上で20分以上加熱することで糊化を完了させているとの記述がある。",
+      "process_meaning": "炊飯工程で高温到達だけでなく保持時間が重要。",
+      "risk_if_insufficient": "高温保持不足による糊化不足・芯残り。",
+      "risk_if_excessive": "過保持では水分・食感・焦げ等の別問題。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_003",
+      "claim_id": "CLM_TEMP_015",
+      "boundary_note": "設備条件ではなく米粒糊化の理解用。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_016",
+    "summary": "98 / 100 / 沸騰後時間/粒内不均一",
+    "record": {
+      "event_id": "TEMP_EVENT_016",
+      "temperature_min_c": 98,
+      "temperature_max_c": 100,
+      "stage": "沸騰後時間/粒内不均一",
+      "rice_change_event": "加水比1.9では沸騰後3分で一般炊飯の水分含量に近いが、糊化度は加水比1.0消火後15分の方が10%以上高い。",
+      "process_meaning": "水分量と糊化度は同じではない。",
+      "risk_if_insufficient": "水分だけ見て炊けたと判断するリスク。",
+      "risk_if_excessive": "加水過多でも中心糊化不足が残る可能性。",
+      "cardization_priority": "A",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_005",
+      "claim_id": "CLM_TEMP_016",
+      "boundary_note": "大会要旨。コシヒカリ・加水比条件限定。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_017",
+    "summary": "98 / 100 / 沸騰後3分",
+    "record": {
+      "event_id": "TEMP_EVENT_017",
+      "temperature_min_c": 98,
+      "temperature_max_c": 100,
+      "stage": "沸騰後3分",
+      "rice_change_event": "沸騰後3分では、加水比にかかわらず粒内が不均一で中心に輝度の低い部分が集まり、中心部まで糊化が進んでいないと推察された。",
+      "process_meaning": "沸騰直後の短時間では中心部が未完了の可能性を示す。",
+      "risk_if_insufficient": "短時間炊飯で中心未糊化。",
+      "risk_if_excessive": "外観上は水分があっても内部が不均一。",
+      "cardization_priority": "A",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_005",
+      "claim_id": "CLM_TEMP_017",
+      "boundary_note": "画像解析・要旨条件限定。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_018",
+    "summary": "90 / 100 / 消火後/蒸らし直前",
+    "record": {
+      "event_id": "TEMP_EVENT_018",
+      "temperature_min_c": 90,
+      "temperature_max_c": 100,
+      "stage": "消火後/蒸らし直前",
+      "rice_change_event": "消火直後は遊離水や粒内水分分布がまだ均一でない可能性がある。",
+      "process_meaning": "蒸らしを工程として分けて考える。",
+      "risk_if_insufficient": "すぐ排出・ほぐしで水分ムラが残る。",
+      "risk_if_excessive": "過度な待機は別の品質問題。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_018",
+      "boundary_note": "農水省の蒸らし説明からの工程整理。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_019",
+    "summary": "70 / 100 / 蒸らし期",
+    "record": {
+      "event_id": "TEMP_EVENT_019",
+      "temperature_min_c": 70,
+      "temperature_max_c": 100,
+      "stage": "蒸らし期",
+      "rice_change_event": "蒸らし期は消火後10分程度高温を維持し、飯粒周辺の遊離水を飯粒内に吸収させ、水分分布を均一化する。",
+      "process_meaning": "蒸らしは仕上がり工程であり、単なる待機ではない。",
+      "risk_if_insufficient": "水分ムラ、べたつき、硬さムラ。",
+      "risk_if_excessive": "長すぎる蒸らしは温度低下・保温品質に影響。",
+      "cardization_priority": "A",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_019",
+      "boundary_note": "高温維持の説明。設備別時間への直用不可。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_020",
+    "summary": "70 / 75 / 保温",
+    "record": {
+      "event_id": "TEMP_EVENT_020",
+      "temperature_min_c": 70,
+      "temperature_max_c": 75,
+      "stage": "保温",
+      "rice_change_event": "炊飯後に70℃程度に保つことで、でんぷんの老化を抑制して食味の良い温かい飯が食べられるようにする説明がある。",
+      "process_meaning": "保温温度は老化抑制の観点で理解する。",
+      "risk_if_insufficient": "低温側に落ちると老化・硬化が進みやすい。",
+      "risk_if_excessive": "長時間保温による乾燥・におい・品質低下は別途管理。",
+      "cardization_priority": "B",
+      "status": "formal",
+      "source_id": "SRC_TEMP_001",
+      "claim_id": "CLM_TEMP_020",
+      "boundary_note": "保温機能説明を一般原理として採用。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_021",
+    "summary": "40 / 60 / 冷却移行",
+    "record": {
+      "event_id": "TEMP_EVENT_021",
+      "temperature_min_c": 40,
+      "temperature_max_c": 60,
+      "stage": "冷却移行",
+      "rice_change_event": "糊化後の澱粉は冷却過程で分子間に水素結合が形成され、老化に向かう。",
+      "process_meaning": "炊飯後の冷却で食感が変わる理由を説明する。",
+      "risk_if_insufficient": "冷却・保存条件を見ないと硬化原因を誤る。",
+      "risk_if_excessive": "炊飯工程内の加熱claimと保存claimを混同しない。",
+      "cardization_priority": "B",
+      "status": "conditional",
+      "source_id": "SRC_TEMP_007",
+      "claim_id": "CLM_TEMP_021",
+      "boundary_note": "RVA米粉懸濁液の説明。米飯粒の直接条件ではない。"
+    }
+  },
+  {
+    "id": "TEMP_EVENT_022",
+    "summary": "25 / 30 / 常温保存",
+    "record": {
+      "event_id": "TEMP_EVENT_022",
+      "temperature_min_c": 25,
+      "temperature_max_c": 30,
+      "stage": "常温保存",
+      "rice_change_event": "25℃保存では10℃保存より老化変化が小さかった報告がある。",
+      "process_meaning": "おにぎり・弁当・冷飯品質の温度設計に関係。",
+      "risk_if_insufficient": "冷蔵すれば常に品質が良いという誤解。",
+      "risk_if_excessive": "衛生・保存期限とは別に考える必要。",
+      "cardization_priority": "B",
+      "status": "formal",
+      "source_id": "SRC_TEMP_006",
+      "claim_id": "CLM_TEMP_022",
+      "boundary_note": "品質・物性の保存温度claim。衛生判断とは分ける。"
+    }
+  },
+  {
+    "id": "MAP_B05_001",
+    "summary": "計量・加水 / 加水比 / 米重量×1.3〜1.5倍等の範囲記述あり",
+    "record": {
+      "map_id": "MAP_B05_001",
+      "process_stage": "計量・加水",
+      "control_axis": "加水比",
+      "condition_or_range": "米重量×1.3〜1.5倍等の範囲記述あり",
+      "rice_change_event": "吸水量と加熱中の蒸発量を見込んで加水量を決める",
+      "quality_variable": "炊き上がり重量・硬さ",
+      "process_meaning": "加水は単独値ではなく吸水量＋蒸発量と関係する",
+      "use_as_card": "加水量の基本",
+      "status": "conditional",
+      "source_id": "SRC_B05_001",
+      "claim_link": "CL_B05_001-005"
+    }
+  },
+  {
+    "id": "MAP_B05_002",
+    "summary": "計量・加水 / 炊き上がり倍率 / 米重量の2.1〜2.3倍前後が好ましい硬さとされる記述",
+    "record": {
+      "map_id": "MAP_B05_002",
+      "process_stage": "計量・加水",
+      "control_axis": "炊き上がり倍率",
+      "condition_or_range": "米重量の2.1〜2.3倍前後が好ましい硬さとされる記述",
+      "rice_change_event": "炊飯後重量が食感評価と結びつく",
+      "quality_variable": "硬さ・食味",
+      "process_meaning": "炊飯倍率は品質確認指標になる",
+      "use_as_card": "炊き上がり重量",
+      "status": "formal",
+      "source_id": "SRC_B05_001",
+      "claim_link": "CL_B05_006-008"
+    }
+  },
+  {
+    "id": "MAP_B05_003",
+    "summary": "洗米後計量 / 付着水 / 洗米中に約10％程度の付着水で重くなる記述",
+    "record": {
+      "map_id": "MAP_B05_003",
+      "process_stage": "洗米後計量",
+      "control_axis": "付着水",
+      "condition_or_range": "洗米中に約10％程度の付着水で重くなる記述",
+      "rice_change_event": "米重量基準と洗米後重量基準がずれる",
+      "quality_variable": "加水誤差",
+      "process_meaning": "工場では洗米後重量・水切り条件を分ける必要がある",
+      "use_as_card": "洗米後重量",
+      "status": "formal",
+      "source_id": "SRC_B05_001",
+      "claim_link": "CL_B05_009-012"
+    }
+  },
+  {
+    "id": "MAP_B05_004",
+    "summary": "浸漬 / 水温×時間 / 30分で急速吸水、約2時間でほぼ飽和の説明",
+    "record": {
+      "map_id": "MAP_B05_004",
+      "process_stage": "浸漬",
+      "control_axis": "水温×時間",
+      "condition_or_range": "30分で急速吸水、約2時間でほぼ飽和の説明",
+      "rice_change_event": "吸水が初期に大きく進む",
+      "quality_variable": "吸水率・芯残り",
+      "process_meaning": "浸漬不足と加熱不足を分けて考える",
+      "use_as_card": "吸水曲線",
+      "status": "formal",
+      "source_id": "SRC_B05_001",
+      "claim_link": "CL_B05_013-016"
+    }
+  },
+  {
+    "id": "MAP_B05_005",
+    "summary": "浸漬 / 高温浸漬 / 65〜90℃長時間浸漬",
+    "record": {
+      "map_id": "MAP_B05_005",
+      "process_stage": "浸漬",
+      "control_axis": "高温浸漬",
+      "condition_or_range": "65〜90℃長時間浸漬",
+      "rice_change_event": "部分糊化・表層変化・不均一物性",
+      "quality_variable": "硬さ・粘り・付着性",
+      "process_meaning": "高温浸漬は通常飯と異なる物性を作る",
+      "use_as_card": "高温浸漬注意",
+      "status": "conditional",
+      "source_id": "SRC_B05_002",
+      "claim_link": "CL_B05_020-031"
+    }
+  },
+  {
+    "id": "MAP_B05_006",
+    "summary": "加熱 / 沸騰到達 / 98℃到達を沸騰定義として扱う研究あり",
+    "record": {
+      "map_id": "MAP_B05_006",
+      "process_stage": "加熱",
+      "control_axis": "沸騰到達",
+      "condition_or_range": "98℃到達を沸騰定義として扱う研究あり",
+      "rice_change_event": "温度到達後も水分・糊化が変化し続ける",
+      "quality_variable": "糊化度・水分",
+      "process_meaning": "沸騰到達だけでなく保持時間が必要",
+      "use_as_card": "沸騰後保持",
+      "status": "formal",
+      "source_id": "SRC_B05_003",
+      "claim_link": "CL_B05_040-050"
+    }
+  },
+  {
+    "id": "MAP_B05_007",
+    "summary": "加熱 / 沸騰後時間 / 10分、20分、30分など研究条件",
+    "record": {
+      "map_id": "MAP_B05_007",
+      "process_stage": "加熱",
+      "control_axis": "沸騰後時間",
+      "condition_or_range": "10分、20分、30分など研究条件",
+      "rice_change_event": "水分含量・糊化度・粒長が変化",
+      "quality_variable": "水分・粒長・糊化度",
+      "process_meaning": "時間配分が同じ総時間でも物性差を作る",
+      "use_as_card": "時間配分",
+      "status": "conditional",
+      "source_id": "SRC_B05_003",
+      "claim_link": "CL_B05_051-065"
+    }
+  },
+  {
+    "id": "MAP_B05_008",
+    "summary": "途中加水 / 追加加水タイミング / 沸騰後3/10/15/20分など",
+    "record": {
+      "map_id": "MAP_B05_008",
+      "process_stage": "途中加水",
+      "control_axis": "追加加水タイミング",
+      "condition_or_range": "沸騰後3/10/15/20分など",
+      "rice_change_event": "加水タイミングで水分・硬さ・粘りが変わる",
+      "quality_variable": "硬さ・粘り・付着性",
+      "process_meaning": "加水量だけでなく入れる時点が重要",
+      "use_as_card": "途中加水",
+      "status": "conditional",
+      "source_id": "SRC_B05_003",
+      "claim_link": "CL_B05_066-077"
+    }
+  },
+  {
+    "id": "MAP_B05_009",
+    "summary": "品種別加水 / 高アミロース米 / 越のかおり 1.8〜2.2倍等",
+    "record": {
+      "map_id": "MAP_B05_009",
+      "process_stage": "品種別加水",
+      "control_axis": "高アミロース米",
+      "condition_or_range": "越のかおり 1.8〜2.2倍等",
+      "rice_change_event": "加水増で硬さ低下、付着性・粘り増加",
+      "quality_variable": "硬さ・付着性・粘り",
+      "process_meaning": "品種により適正加水は異なる",
+      "use_as_card": "品種別加水",
+      "status": "conditional",
+      "source_id": "SRC_B05_004",
+      "claim_link": "CL_B05_080-091"
+    }
+  },
+  {
+    "id": "MAP_B05_010",
+    "summary": "評価 / 物性指標 / 硬さ、粘り、付着性、水分、L*値",
+    "record": {
+      "map_id": "MAP_B05_010",
+      "process_stage": "評価",
+      "control_axis": "物性指標",
+      "condition_or_range": "硬さ、粘り、付着性、水分、L*値",
+      "rice_change_event": "複数指標で食味・外観を評価",
+      "quality_variable": "物性・官能",
+      "process_meaning": "硬さだけで判断しない",
+      "use_as_card": "米飯物性の見方",
+      "status": "formal",
+      "source_id": "SRC_B05_002;SRC_B05_003;SRC_B05_006",
+      "claim_link": "CL_B05_092-105"
+    }
+  },
+  {
+    "id": "PHASE_001",
+    "summary": "洗米後・加水前 / 常温〜水温 / 付着水・洗米後重量が加水計算へ影響",
+    "record": {
+      "phase_id": "PHASE_001",
+      "process_stage": "洗米後・加水前",
+      "temperature_zone": "常温〜水温",
+      "rice_change_event": "付着水・洗米後重量が加水計算へ影響",
+      "process_meaning": "洗米後の米重量は乾米重量と異なる。加水量を乾米基準だけで見るとズレが出る。",
+      "control_point": "加水計算、再現性",
+      "source_id": "SRC_MAFF_RICE_COOKING_CHARACTERISTICS",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_002",
+    "summary": "浸漬初期 / 水温5〜30℃程度 / 初期30分の吸水が速い",
+    "record": {
+      "phase_id": "PHASE_002",
+      "process_stage": "浸漬初期",
+      "temperature_zone": "水温5〜30℃程度",
+      "rice_change_event": "初期30分の吸水が速い",
+      "process_meaning": "浸漬開始直後は吸水が進みやすく、最低浸漬時間の説明軸になる。",
+      "control_point": "吸水不足、芯残り",
+      "source_id": "SRC_MAFF_RICE_COOKING_CHARACTERISTICS",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_003",
+    "summary": "浸漬平衡に近づく段階 / 水温・品種依存 / 約2時間でほぼ飽和に近づく説明がある",
+    "record": {
+      "phase_id": "PHASE_003",
+      "process_stage": "浸漬平衡に近づく段階",
+      "temperature_zone": "水温・品種依存",
+      "rice_change_event": "約2時間でほぼ飽和に近づく説明がある",
+      "process_meaning": "長く浸せば比例して吸水し続けるわけではない。",
+      "control_point": "浸漬時間設計",
+      "source_id": "SRC_MAFF_RICE_COOKING_CHARACTERISTICS",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_004",
+    "summary": "低温/温水浸漬比較 / 5〜50℃ / 短時間と平衡状態で吸水傾向が変わる",
+    "record": {
+      "phase_id": "PHASE_004",
+      "process_stage": "低温/温水浸漬比較",
+      "temperature_zone": "5〜50℃",
+      "rice_change_event": "短時間と平衡状態で吸水傾向が変わる",
+      "process_meaning": "温水ほど常に最終吸水率が高いとは限らない。",
+      "control_point": "水温×時間の整理",
+      "source_id": "SRC_JSTAGE_COOKSCI_2015_SAKAMOTO_SOAK",
+      "status": "conditional"
+    }
+  },
+  {
+    "id": "PHASE_005",
+    "summary": "長時間高温浸漬 / 65〜90℃ / 外観が通常に見えても物性が変わる場合がある",
+    "record": {
+      "phase_id": "PHASE_005",
+      "process_stage": "長時間高温浸漬",
+      "temperature_zone": "65〜90℃",
+      "rice_change_event": "外観が通常に見えても物性が変わる場合がある",
+      "process_meaning": "高温に長くさらすと表層の粘り・付着性などが変わる。",
+      "control_point": "温水浸漬の上限管理",
+      "source_id": "SRC_JSTAGE_COOKSCI_2013_MEKKO_PHYS",
+      "status": "conditional"
+    }
+  },
+  {
+    "id": "PHASE_006",
+    "summary": "昇温期 / 常温→沸騰 / 水分吸収と糊化進行の両方に関係",
+    "record": {
+      "phase_id": "PHASE_006",
+      "process_stage": "昇温期",
+      "temperature_zone": "常温→沸騰",
+      "rice_change_event": "水分吸収と糊化進行の両方に関係",
+      "process_meaning": "沸騰までの時間は、単なる待ち時間ではなく工程品質に関係する。",
+      "control_point": "加熱速度、温度履歴",
+      "source_id": "SRC_JSTAGE_JHEJ_2009_KAINUMA",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_007",
+    "summary": "沸騰到達前後 / 約98〜100℃ / 沸騰時に適量の水が残ることが重要",
+    "record": {
+      "phase_id": "PHASE_007",
+      "process_stage": "沸騰到達前後",
+      "temperature_zone": "約98〜100℃",
+      "rice_change_event": "沸騰時に適量の水が残ることが重要",
+      "process_meaning": "昇温が速すぎ/遅すぎ、加水が少ないなどで沸騰期の状態が変わる。",
+      "control_point": "沸騰期確保",
+      "source_id": "SRC_JSTAGE_JHEJ_2009_KAINUMA",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_008",
+    "summary": "沸騰継続・高温保持 / 98℃以上 / 高温到達だけでなく保持時間が必要",
+    "record": {
+      "phase_id": "PHASE_008",
+      "process_stage": "沸騰継続・高温保持",
+      "temperature_zone": "98℃以上",
+      "rice_change_event": "高温到達だけでなく保持時間が必要",
+      "process_meaning": "中心部まで炊けた状態にするには98℃以上の時間が重要。",
+      "control_point": "芯残り、糊化不足",
+      "source_id": "SRC_JSTAGE_JHEJ_1986_SEKI_BOILING",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_009",
+    "summary": "蒸し煮期 / 98℃以上を含む高温域 / 沸騰期と合わせた高温履歴で米粒状態が決まる",
+    "record": {
+      "phase_id": "PHASE_009",
+      "process_stage": "蒸し煮期",
+      "temperature_zone": "98℃以上を含む高温域",
+      "rice_change_event": "沸騰期と合わせた高温履歴で米粒状態が決まる",
+      "process_meaning": "直接加熱時間だけでなく、蒸し煮期を含めて高温履歴を見る。",
+      "control_point": "高温保持設計",
+      "source_id": "SRC_JSTAGE_JHEJ_2009_KAINUMA",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_010",
+    "summary": "蒸らし初期 / 消火後高温域 / 遊離水を飯粒内へ移し、水分分布を均一化",
+    "record": {
+      "phase_id": "PHASE_010",
+      "process_stage": "蒸らし初期",
+      "temperature_zone": "消火後高温域",
+      "rice_change_event": "遊離水を飯粒内へ移し、水分分布を均一化",
+      "process_meaning": "蒸らしは余熱放置ではなく、水分分布を整える工程。",
+      "control_point": "蒸らし不足、べたつき/芯感",
+      "source_id": "SRC_MAFF_RICE_COOKING_CHARACTERISTICS",
+      "status": "formal"
+    }
+  },
+  {
+    "id": "PHASE_011",
+    "summary": "蒸らし完了後 / 高温から低下 / 混ぜ・ほぐし前の水分状態が整う",
+    "record": {
+      "phase_id": "PHASE_011",
+      "process_stage": "蒸らし完了後",
+      "temperature_zone": "高温から低下",
+      "rice_change_event": "混ぜ・ほぐし前の水分状態が整う",
+      "process_meaning": "蒸らし後の扱いで粒の表層・付着感が変わる可能性がある。",
+      "control_point": "ほぐし、移送",
+      "source_id": "SRC_MAFF_RICE_COOKING_CHARACTERISTICS",
+      "status": "field_note"
+    }
+  },
+  {
+    "id": "PHASE_012",
+    "summary": "品種別加水設計 / 工程全体 / 品種・アミロース特性で適正加水が変わる",
+    "record": {
+      "phase_id": "PHASE_012",
+      "process_stage": "品種別加水設計",
+      "temperature_zone": "工程全体",
+      "rice_change_event": "品種・アミロース特性で適正加水が変わる",
+      "process_meaning": "一般加水倍率を全品種に固定しない。",
+      "control_point": "品種別設計",
+      "source_id": "SRC_AGRI_KOSHINOKAORI_WATER_RATIO",
+      "status": "conditional"
+    }
+  },
+  {
+    "id": "MAP07_001",
+    "summary": "浸漬初期 / 水温依存 / 開始〜30分付近",
+    "record": {
+      "map_id": "MAP07_001",
+      "stage": "浸漬初期",
+      "temperature_band": "水温依存",
+      "time_axis": "開始〜30分付近",
+      "water_axis": "吸水が急速に進む領域",
+      "rice_change_event": "米粒表層から内部へ水が入り始める",
+      "texture_axis": "炊飯後の芯残り・硬さに関係",
+      "control_point": "浸漬時間だけでなく水温を記録する",
+      "if_low_or_short": "吸水不足で加熱時の糊化進行が不安定になる可能性",
+      "if_high_or_long": "長時間化では水温・品質管理が必要",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "formal",
+      "boundary_note": "農水省資料の一般説明を工程理解に使用"
+    }
+  },
+  {
+    "id": "MAP07_002",
+    "summary": "浸漬平衡接近 / 30分〜約2時間 / 約2時間でほぼ飽和に近づく説明あり",
+    "record": {
+      "map_id": "MAP07_002",
+      "stage": "浸漬平衡接近",
+      "temperature_band": "30分〜約2時間",
+      "time_axis": "約2時間でほぼ飽和に近づく説明あり",
+      "water_axis": "米重量に対する吸水率が上がる",
+      "rice_change_event": "米粒内の水分分布が進む",
+      "texture_axis": "硬さ・粘り・炊き上がり重量に影響",
+      "control_point": "浸漬不足と加水不足を分けて見る",
+      "if_low_or_short": "水を増やしても粒内吸水不足は残る場合がある",
+      "if_high_or_long": "過度な長時間浸漬は条件別に扱う",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "formal",
+      "boundary_note": "約2時間は一般説明。品種・水温・洗米条件で変わる"
+    }
+  },
+  {
+    "id": "MAP07_003",
+    "summary": "低温浸漬 / 5〜10℃含む低温域 / 5〜240分条件での研究あり",
+    "record": {
+      "map_id": "MAP07_003",
+      "stage": "低温浸漬",
+      "temperature_band": "5〜10℃含む低温域",
+      "time_axis": "5〜240分条件での研究あり",
+      "water_axis": "平衡時に温水より吸水率が高くなる報告",
+      "rice_change_event": "温度により吸水曲線が変わる",
+      "texture_axis": "炊飯後食味への影響は課題として扱う",
+      "control_point": "低温だから吸水しないと単純化しない",
+      "if_low_or_short": "短時間では吸水不足になる可能性",
+      "if_high_or_long": "長時間低温では吸水は進むが現場条件確認が必要",
+      "source_id": "SRC_COOKERY_SAKAMOTO_2015",
+      "status": "conditional",
+      "boundary_note": "洗米なし等の実験条件。現場では条件付き"
+    }
+  },
+  {
+    "id": "MAP07_004",
+    "summary": "温水浸漬 / 40〜50℃ / 5〜240分条件での研究あり",
+    "record": {
+      "map_id": "MAP07_004",
+      "stage": "温水浸漬",
+      "temperature_band": "40〜50℃",
+      "time_axis": "5〜240分条件での研究あり",
+      "water_axis": "短時間側の吸水が進みやすいが平衡時は低温と違う",
+      "rice_change_event": "浸漬液中の固形分が増える報告",
+      "texture_axis": "食感・外観への影響を分けて評価",
+      "control_point": "短縮目的で使う場合は温度・時間をセット管理",
+      "if_low_or_short": "温度だけ上げても望む吸水とは限らない",
+      "if_high_or_long": "固形分流出や表面変化を条件付きで注意",
+      "source_id": "SRC_COOKERY_SAKAMOTO_2015",
+      "status": "conditional",
+      "boundary_note": "温水浸漬は正式一般論ではなく条件付き"
+    }
+  },
+  {
+    "id": "MAP07_005",
+    "summary": "高温浸漬 / 65℃以上 / 長時間浸漬条件",
+    "record": {
+      "map_id": "MAP07_005",
+      "stage": "高温浸漬",
+      "temperature_band": "65℃以上",
+      "time_axis": "長時間浸漬条件",
+      "water_axis": "米粒表面・内部の変化が強くなる",
+      "rice_change_event": "硬さ・粘り・付着性・官能評価が通常飯と異なる",
+      "texture_axis": "粉っぽさ、不均一感などにつながる報告",
+      "control_point": "高温浸漬は標準工程と分けて管理",
+      "if_low_or_short": "低すぎる温度帯の吸水問題とは別原因",
+      "if_high_or_long": "高温長時間では品質低下リスク",
+      "source_id": "SRC_COOKERY_HIGHTEMP_SOAK_2013",
+      "status": "conditional",
+      "boundary_note": "65℃以上長時間条件に限定"
+    }
+  },
+  {
+    "id": "MAP07_006",
+    "summary": "昇温期 / 常温〜沸騰前 / 沸騰まで約10分が目安とされる研究あり",
+    "record": {
+      "map_id": "MAP07_006",
+      "stage": "昇温期",
+      "temperature_band": "常温〜沸騰前",
+      "time_axis": "沸騰まで約10分が目安とされる研究あり",
+      "water_axis": "加熱中にも吸水が進む",
+      "rice_change_event": "吸水と糊化の両方が進行",
+      "texture_axis": "硬さ・芯残りに影響",
+      "control_point": "沸騰到達時間を工程指標にする",
+      "if_low_or_short": "昇温が遅すぎる/早すぎる場合の水残りと吸水を確認",
+      "if_high_or_long": "加熱過多では焦げ・乾きの方向を見る",
+      "source_id": "SRC_JHEJ_KAINUMA_2009",
+      "status": "conditional",
+      "boundary_note": "家庭調理条件由来。現場設定値ではなく指標"
+    }
+  },
+  {
+    "id": "MAP07_007",
+    "summary": "糊化開始領域 / 約60℃以上 / 到達後の時間が必要",
+    "record": {
+      "map_id": "MAP07_007",
+      "stage": "糊化開始領域",
+      "temperature_band": "約60℃以上",
+      "time_axis": "到達後の時間が必要",
+      "water_axis": "水がある状態でデンプン糊化が進む",
+      "rice_change_event": "米粒中心部までの変化は時間を要する",
+      "texture_axis": "芯残り・硬さに直結",
+      "control_point": "温度到達だけでなく保持時間を見る",
+      "if_low_or_short": "60℃以上に短時間触れただけでは十分とは言えない",
+      "if_high_or_long": "長時間高温化は水分低下や物性変化を招く",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "formal",
+      "boundary_note": "糊化開始は工程理解として採用"
+    }
+  },
+  {
+    "id": "MAP07_008",
+    "summary": "沸騰期 / 98〜100℃付近 / 沸騰継続時間が重要",
+    "record": {
+      "map_id": "MAP07_008",
+      "stage": "沸騰期",
+      "temperature_band": "98〜100℃付近",
+      "time_axis": "沸騰継続時間が重要",
+      "water_axis": "残水の対流で温度均一化",
+      "rice_change_event": "吸水と糊化がさらに進む",
+      "texture_axis": "表面粘り、硬さ、中心部の炊け具合に影響",
+      "control_point": "沸騰到達・継続・残水を分けて記録",
+      "if_low_or_short": "沸騰継続不足では糊化度が低い可能性",
+      "if_high_or_long": "長すぎると柔らかさ・水分状態が変化",
+      "source_id": "SRC_JHEJ_SEKI_1986",
+      "status": "formal",
+      "boundary_note": "実験条件の結果。一般の工程判断に転用時は注意"
+    }
+  },
+  {
+    "id": "MAP07_009",
+    "summary": "高温保持 / 98℃以上 / 約15〜20分または約20分の説明あり",
+    "record": {
+      "map_id": "MAP07_009",
+      "stage": "高温保持",
+      "temperature_band": "98℃以上",
+      "time_axis": "約15〜20分または約20分の説明あり",
+      "water_axis": "水分が米粒内部へ移動し糊化が進む",
+      "rice_change_event": "中心部まで糊化させるための重要帯",
+      "texture_axis": "芯残り防止、適度な粘りに関係",
+      "control_point": "最高温度ではなく98℃以上時間を管理",
+      "if_low_or_short": "保持不足は芯・硬さ・粘り不足につながる",
+      "if_high_or_long": "保持過多は軟化・べたつき方向を確認",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS;SRC_JHEJ_KAINUMA_2009",
+      "status": "formal",
+      "boundary_note": "家庭/一般調理説明。工場機械設定は別途検証"
+    }
+  },
+  {
+    "id": "MAP07_010",
+    "summary": "蒸し煮期 / 高温維持 / 液体水が少ない時期",
+    "record": {
+      "map_id": "MAP07_010",
+      "stage": "蒸し煮期",
+      "temperature_band": "高温維持",
+      "time_axis": "液体水が少ない時期",
+      "water_axis": "糊化はまだ進行中",
+      "rice_change_event": "焦げを避けながら高温維持",
+      "texture_axis": "ムラ、芯、焦げに関係",
+      "control_point": "残水が少ないため火力/熱履歴を分ける",
+      "if_low_or_short": "温度低下が早いと中心部の進行不足",
+      "if_high_or_long": "過熱では底面乾き・焦げ方向",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "formal",
+      "boundary_note": "工程説明として採用"
+    }
+  },
+  {
+    "id": "MAP07_011",
+    "summary": "蒸らし初期 / 消火後高温域 / 10〜15分の蒸らし操作の説明あり",
+    "record": {
+      "map_id": "MAP07_011",
+      "stage": "蒸らし初期",
+      "temperature_band": "消火後高温域",
+      "time_axis": "10〜15分の蒸らし操作の説明あり",
+      "water_axis": "遊離水が飯粒へ吸収される",
+      "rice_change_event": "水分分布が均一化する",
+      "texture_axis": "硬さムラ・べたつき・ほぐれに関係",
+      "control_point": "蒸らし時間を工程として独立管理",
+      "if_low_or_short": "短すぎると水分分布ムラが残る可能性",
+      "if_high_or_long": "長すぎると温度低下・用途別品質に影響",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS;SRC_JHEJ_KAINUMA_2009",
+      "status": "formal",
+      "boundary_note": "蒸らしは単なる待ち時間ではなく工程"
+    }
+  },
+  {
+    "id": "MAP07_012",
+    "summary": "ほぐし前 / 蒸らし後 / 蒸らし完了後すみやかに扱う領域",
+    "record": {
+      "map_id": "MAP07_012",
+      "stage": "ほぐし前",
+      "temperature_band": "蒸らし後",
+      "time_axis": "蒸らし完了後すみやかに扱う領域",
+      "water_axis": "水分分布が整った後の機械的処理",
+      "rice_change_event": "飯粒表面の付着・ほぐれが変化",
+      "texture_axis": "粒つぶれ、付着、ムラに関係",
+      "control_point": "ほぐしは温度・水分・粘りの結果を見る",
+      "if_low_or_short": "蒸らし不足ならほぐしでムラが目立つ",
+      "if_high_or_long": "過度な機械負荷では粒損傷・粘り増加",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "conditional",
+      "boundary_note": "ほぐし動作自体は現場条件が大きいため条件付き"
+    }
+  },
+  {
+    "id": "MAP07_013",
+    "summary": "保温 / 約70℃程度 / 炊飯後の保持時間",
+    "record": {
+      "map_id": "MAP07_013",
+      "stage": "保温",
+      "temperature_band": "約70℃程度",
+      "time_axis": "炊飯後の保持時間",
+      "water_axis": "水分・温度を保ちながら老化を抑える説明あり",
+      "rice_change_event": "デンプン老化を遅らせる方向",
+      "texture_axis": "食味維持・硬化抑制",
+      "control_point": "保温温度と時間をセットで管理",
+      "if_low_or_short": "低温化すると老化・硬化方向",
+      "if_high_or_long": "長時間保温は乾き・黄変・におい等を別評価",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS",
+      "status": "formal",
+      "boundary_note": "保温品質は時間・装置で変わる"
+    }
+  },
+  {
+    "id": "MAP07_014",
+    "summary": "加水設計 / 炊飯前 / 水量設定時",
+    "record": {
+      "map_id": "MAP07_014",
+      "stage": "加水設計",
+      "temperature_band": "炊飯前",
+      "time_axis": "水量設定時",
+      "water_axis": "吸水量＋加熱中の蒸発量として加水を見る",
+      "rice_change_event": "炊き上がり重量と水分に影響",
+      "texture_axis": "硬さ・粘り・付着性に影響",
+      "control_point": "洗米後付着水も考慮する",
+      "if_low_or_short": "加水不足は硬さ・芯・老化早さ方向",
+      "if_high_or_long": "加水過多は軟化・べたつき方向",
+      "source_id": "SRC_MAFF_COOKING_CHARACTERISTICS;SRC_JHEJ_KAINUMA_2009",
+      "status": "formal",
+      "boundary_note": "基本概念として採用。倍率は条件で変動"
+    }
+  },
+  {
+    "id": "MAP07_015",
+    "summary": "品種別加水 / 炊飯前 / 品種・用途別",
+    "record": {
+      "map_id": "MAP07_015",
+      "stage": "品種別加水",
+      "temperature_band": "炊飯前",
+      "time_axis": "品種・用途別",
+      "water_axis": "高アミロース米では適正加水が異なる",
+      "rice_change_event": "水分含量・硬さ・粘りが変わる",
+      "texture_axis": "低粘り品種の食感設計に関係",
+      "control_point": "品種別に加水率を検討する",
+      "if_low_or_short": "標準うるち米の値を使うと硬すぎる場合",
+      "if_high_or_long": "増やしすぎると粘り・付着性が変わる",
+      "source_id": "SRC_AFFRC_KOSHINOKAORI_2018",
+      "status": "conditional",
+      "boundary_note": "越のかおり条件。一般米へ転用しない"
+    }
+  }
+]

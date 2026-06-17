@@ -1,0 +1,164 @@
+[
+  {
+    "claim_id": "MOLD001",
+    "theme": "温度",
+    "claim_ja": "多くのカビは20〜30℃程度で盛んに生育・増殖しやすい。",
+    "use_in_rule": "庫内温度が20〜30℃の場合、湿度・米水分・残留米と組み合わせて注意判定。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "一般論。ただし温度単独で使用停止判定にしない。"
+  },
+  {
+    "claim_id": "MOLD002",
+    "theme": "湿度",
+    "claim_ja": "相対湿度70％以上では結露しやすく、カビやダニが増えやすい。",
+    "use_in_rule": "庫内湿度70％以上でカビ・結露注意。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "70％は注意域。実際の水分活性・米水分・表面結露も見る。"
+  },
+  {
+    "claim_id": "MOLD003",
+    "theme": "低湿条件",
+    "claim_ja": "相対湿度70％以下では多くのカビが生育しにくい。",
+    "use_in_rule": "RH70％未満でも安全保証ではなく、胞子残存・残留米・水分を併せて確認。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "生育しにくい＝死滅ではない。"
+  },
+  {
+    "claim_id": "MOLD004",
+    "theme": "米水分",
+    "claim_ja": "常温貯蔵の目安として玄米水分15.0％以下、籾米14.5％以下を確認する。",
+    "use_in_rule": "玄米>15.0%、籾米>14.5%で保管リスク上昇。",
+    "source_ids": "MOLD-SRC001;MOLD-SRC005",
+    "evidence_level": "A",
+    "limitations": "白米・精米米には社内規格/仕様値を優先。"
+  },
+  {
+    "claim_id": "MOLD005",
+    "theme": "胞子残存",
+    "claim_ja": "カビは不適条件で生育しにくくなっても、胞子が残り条件が整うと再び生育する可能性がある。",
+    "use_in_rule": "乾燥・低湿だけで安心せず、残留米・清掃・隔離を管理。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "アプリでは『再発リスク』として表示。"
+  },
+  {
+    "claim_id": "MOLD006",
+    "theme": "タンク点検",
+    "claim_ja": "タンクやサイロでは、米表面や内壁に露・水濡れがないかを定期点検する。",
+    "use_in_rule": "納米庫の内壁・天井・米表面・排出口の結露点検をチェックリスト化。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "納米庫に適用しやすい。"
+  },
+  {
+    "claim_id": "MOLD007",
+    "theme": "臭気目視",
+    "claim_ja": "米を目で見て臭いを確認し、カビの有無を確認する。",
+    "use_in_rule": "カビ臭・目視カビは即時停止条件。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "炊飯調整対象にしない。"
+  },
+  {
+    "claim_id": "MOLD008",
+    "theme": "隔離",
+    "claim_ja": "カビが生育していた米は他の米と確実に分け、汚染拡大を防ぐ。",
+    "use_in_rule": "目視カビ/カビ臭ありは使用停止・隔離・品質確認。",
+    "source_ids": "MOLD-SRC001;MOLD-SRC006",
+    "evidence_level": "A",
+    "limitations": "廃棄判断は社内QA/法規に従う。"
+  },
+  {
+    "claim_id": "MOLD009",
+    "theme": "床落ち米",
+    "claim_ja": "乾燥調製中に床へ米を落とさず、床に落ちた米やほこりを取り除く。",
+    "use_in_rule": "床落ち米・こぼれ米を納米庫へ戻さない表示。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "現場チェック向き。"
+  },
+  {
+    "claim_id": "MOLD010",
+    "theme": "設備清掃",
+    "claim_ja": "米が直接触れる設備内部は使用前後だけでなく定期的に清掃し、乾燥させる。",
+    "use_in_rule": "清掃日未記録/長期未清掃は管理不十分。",
+    "source_ids": "MOLD-SRC001",
+    "evidence_level": "A",
+    "limitations": "納米庫・搬送ライン・ホッパーへ適用。"
+  },
+  {
+    "claim_id": "MOLD011",
+    "theme": "塵埃真菌",
+    "claim_ja": "乾燥調製施設の床面・乾燥機・籾すり機等の塵埃から真菌が高頻度で検出される。",
+    "use_in_rule": "排出口・角部・センサー周辺の米くず/塵埃を高優先点検。",
+    "source_ids": "MOLD-SRC003",
+    "evidence_level": "A",
+    "limitations": "乾燥調製施設調査。納米庫へは類似設備として応用。"
+  },
+  {
+    "claim_id": "MOLD012",
+    "theme": "清掃効果",
+    "claim_ja": "清掃により施設内の真菌数が大きく低減することが示されている。",
+    "use_in_rule": "清掃後確認・空運転・再点検を推奨。",
+    "source_ids": "MOLD-SRC003",
+    "evidence_level": "A",
+    "limitations": "定量値は施設条件依存。"
+  },
+  {
+    "claim_id": "MOLD013",
+    "theme": "残留穀粒",
+    "claim_ja": "サイロ内・昇降機等に残留した前年穀粒が品質事故の原因になる。",
+    "use_in_rule": "残留米あり/長期残留疑いで高リスク。",
+    "source_ids": "MOLD-SRC004",
+    "evidence_level": "A",
+    "limitations": "長期貯蔵施設の知見。納米庫では『長期残留米』として扱う。"
+  },
+  {
+    "claim_id": "MOLD014",
+    "theme": "穀温監視",
+    "claim_ja": "サイロ投入後は毎日定時に穀温を監視・記録する。",
+    "use_in_rule": "米温/庫内温度の記録なしは判定信頼度低下。",
+    "source_ids": "MOLD-SRC004",
+    "evidence_level": "A",
+    "limitations": "納米庫は短期滞留でも記録ルールとして有効。"
+  },
+  {
+    "claim_id": "MOLD015",
+    "theme": "温度差結露",
+    "claim_ja": "冬季はサイロ内外の温度差による結露防止が重要で、温度差を小さく管理する。",
+    "use_in_rule": "外気温と庫内/米温差が大きい場合は結露注意。目安10℃超で注意。",
+    "source_ids": "MOLD-SRC004",
+    "evidence_level": "A",
+    "limitations": "10℃は施設資料の管理考え方からの実装目安。"
+  },
+  {
+    "claim_id": "MOLD016",
+    "theme": "前後工程",
+    "claim_ja": "乾燥調製・貯蔵段階でカビを生育させない管理が重要で、建物・設備・貯蔵・出荷まで管理対象。",
+    "use_in_rule": "納米庫だけでなく投入前・排出後・搬送ラインもチェック対象。",
+    "source_ids": "MOLD-SRC002",
+    "evidence_level": "A",
+    "limitations": "モジュール名は『納米庫・米タンク衛生チェック』が適切。"
+  },
+  {
+    "claim_id": "MOLD017",
+    "theme": "カビ毒",
+    "claim_ja": "一部のカビ毒は食品加工で残る可能性があるため、カビ米を炊飯で解決する表示を避ける。",
+    "use_in_rule": "カビ臭/目視カビは使用停止・隔離。",
+    "source_ids": "MOLD-SRC006;MOLD-SRC007",
+    "evidence_level": "A",
+    "limitations": "安全判断は品質管理部門へ。"
+  },
+  {
+    "claim_id": "MOLD018",
+    "theme": "熱帯保管",
+    "claim_ja": "高温多湿環境では、水分・温度・保管期間・取扱履歴がカビリスクに影響する。",
+    "use_in_rule": "台湾等の高温多湿地域では保管履歴・温湿度履歴を重視。",
+    "source_ids": "MOLD-SRC009",
+    "evidence_level": "B",
+    "limitations": "米ではなく穀物一般/トウモロコシ中心。補助資料扱い。"
+  }
+]
