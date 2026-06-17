@@ -3,42 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b74c8">
+  <meta name="theme-color" content="#0b74e8">
   <title>RICE NAVI</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="app-header">
-    <div class="brand-row">
-      <img src="assets/rice_navi_rn_logo.png" alt="RICE NAVI RN logo" class="logo">
-      <div>
-        <h1>RICE NAVI</h1>
-        <p id="subtitle">炊飯を学ぶ・調べる・確認する</p>
+  <div class="phone-shell">
+    <header class="app-header">
+      <div class="top-row">
+        <div class="brand">
+          <img src="assets/rice_navi_rn_logo.png" alt="RICE NAVI" class="brand-logo">
+          <div>
+            <h1>RICE NAVI</h1>
+            <p>米を楽しく知り、文献で学び、現場で確認する</p>
+          </div>
+        </div>
+        <button class="icon-button" id="searchToggle" aria-label="検索">⌕</button>
       </div>
-    </div>
-    <div class="toolbar">
-      <select id="languageSelect" aria-label="Language">
-        <option value="ja">日本語</option>
-        <option value="en">English</option>
-        <option value="zh_tw">繁體中文</option>
-        <option value="zh_cn">简体中文</option>
-      </select>
-      <input id="searchInput" type="search" placeholder="カード検索" aria-label="Search">
-    </div>
-  </header>
+      <div class="search-row" id="searchRow">
+        <input id="searchInput" type="search" placeholder="キーワードで探す：吸水、糊化、芯残り…" aria-label="検索">
+        <select id="languageSelect" aria-label="表示言語">
+          <option value="ja">日本語</option>
+          <option value="en">English β</option>
+          <option value="zh_tw">繁體 β</option>
+          <option value="zh_cn">简体 β</option>
+        </select>
+      </div>
+    </header>
 
-  <nav id="menu" class="menu" aria-label="RICE NAVI menu"></nav>
+    <main id="app" class="app-main">
+      <section class="loading-card">読み込み中...</section>
+    </main>
 
-  <main id="app" class="app-main">
-    <section class="panel"><h2>読み込み中...</h2></section>
-  </main>
-
-  <footer class="footer">
-    <span>RICE NAVI v5 translation deep-check package</span>
-    <span id="loadStatus"></span>
-  </footer>
-
+    <nav class="bottom-nav" aria-label="下部ナビゲーション">
+      <button data-view="home" class="active"><span>⌂</span><b>ホーム</b></button>
+      <button data-view="meister"><span>▦</span><b>学ぶ</b></button>
+      <button data-view="library"><span>▣</span><b>文献</b></button>
+      <button data-view="checks"><span>✓</span><b>チェック</b></button>
+      <button data-view="status"><span>RN</span><b>状況</b></button>
+    </nav>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>

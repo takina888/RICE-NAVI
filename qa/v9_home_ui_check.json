@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "test": "exists index.html",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "exists styles.css",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "exists app.js",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "exists sw.js",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "exists manifest.webmanifest",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "json rice_navi_learning_cards_multilingual_current.json",
+      "status": "PASS",
+      "note": "82"
+    },
+    {
+      "test": "json rice_navi_term_glossary_multilingual_v82.json",
+      "status": "PASS",
+      "note": "30"
+    },
+    {
+      "test": "json rice_navi_storage_mold_rules_v1_0.json",
+      "status": "PASS",
+      "note": "14"
+    },
+    {
+      "test": "json rice_navi_future_rice_50_ja_LATEST.json",
+      "status": "PASS",
+      "note": "50"
+    },
+    {
+      "test": "json rice_navi_temperature_event_map_v77.json",
+      "status": "PASS",
+      "note": "59"
+    },
+    {
+      "test": "uses お米マイスター100",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "no old label お米マスター100 in app files",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "test": "RICE NAVI name",
+      "status": "PASS",
+      "note": ""
+    }
+  ]
+}
