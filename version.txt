@@ -1,2 +1,0 @@
-RICE NAVI v26
-If this file shows v26, GitHub upload/deploy reached the server.
