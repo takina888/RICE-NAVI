@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+<title>RICE NAVI キャッシュ初期化 v26</title>
+<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f8fc;color:#00224a;margin:0;padding:24px}.box{max-width:880px;margin:auto;background:#fff;border-radius:22px;padding:28px;box-shadow:0 8px 28px rgba(20,80,140,.08)}button,.btn{background:#0b6fd3;color:white;border:0;border-radius:14px;padding:16px 22px;font-weight:800;font-size:16px;text-decoration:none;display:inline-block;cursor:pointer;margin:6px}.ghost{background:#eef5ff;color:#0b4f9f}.log{background:#eaf4ff;border-radius:14px;padding:14px;margin-top:16px;white-space:pre-wrap;line-height:1.7}.warn{background:#fff3cd;padding:12px;border-radius:12px}</style>
+</head><body><div class="box"><h1>RICE NAVI キャッシュ初期化 v26</h1><p>古い画面が残る場合に、Service WorkerとCache Storageを解除します。</p><p class="warn">このページはボタンが押せない問題を避けるため、単純なHTMLと単純なJavaScriptだけで作っています。</p><button type="button" onclick="resetAndOpen()">初期化してRICE NAVIを開く</button><a class="btn ghost" href="./index.html?v=26&direct=1">初期化せず開く</a><a class="btn ghost" href="./index-v26.html?v=26&direct=1">v26直接起動</a><a class="btn ghost" href="./diagnose-v26.html?v=26">診断ページ</a><div id="log" class="log">待機中</div></div>
+<script>
+function log(t){document.getElementById('log').textContent += '\n' + t;}
+async function resetAndOpen(){
+  document.getElementById('log').textContent='初期化開始';
+  try{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations(); log('Service Worker: '+regs.length+'件');
+      for(const r of regs){ await r.unregister(); }
+      log('Service Worker解除完了');
+    } else { log('Service Worker未対応'); }
+    if('caches' in window){
+      const names=await caches.keys(); log('Cache Storage: '+names.length+'件');
+      for(const n of names){ await caches.delete(n); }
+      log('Cache Storage削除完了');
+    } else { log('Cache Storage未対応'); }
+    log('v26へ移動します');
+    location.href='./index.html?v=26&reset='+Date.now();
+  }catch(e){ log('エラー: '+(e && e.message ? e.message : e)); }
+}
+window.addEventListener('load',()=>setTimeout(resetAndOpen,500));
+</script></body></html>
