@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>RICE NAVI キャッシュ初期化 v24</title>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f8fc;color:#00224a;margin:0;padding:24px}.box{max-width:880px;margin:auto;background:#fff;border-radius:22px;padding:28px;box-shadow:0 8px 28px rgba(20,80,140,.08)}button,.btn{background:#0b6fd3;color:white;border:0;border-radius:14px;padding:14px 20px;font-weight:700;font-size:16px;text-decoration:none;display:inline-block;cursor:pointer}.log{background:#eaf4ff;border-radius:14px;padding:14px;margin-top:16px;white-space:pre-wrap;line-height:1.7}.ghost{background:#eef5ff;color:#0b4f9f}.row{display:flex;gap:12px;flex-wrap:wrap}.small{font-size:13px;color:#54708e}</style>
+</head>
+<body>
+<div class="box">
+<h1>RICE NAVI キャッシュ初期化</h1>
+<p>古い画面が残る場合に、Service Workerとブラウザキャッシュを解除します。</p>
+<div class="row"><button id="resetBtn" type="button">初期化してRICE NAVIを開く</button><a class="btn ghost" href="./index.html?v=24">初期化せず開く</a></div>
+<div id="log" class="log">待機中</div>
+<p class="small">ボタンが効かない場合は、このページを再読み込みするか、<a href="./index.html?v=24">こちら</a>から直接開いてください。</p>
+</div>
+<script>
+(function(){
+  var running=false;
+  var log=document.getElementById('log');
+  var btn=document.getElementById('resetBtn');
+  function say(t){ log.textContent += '\n' + t; }
+  async function resetAndOpen(){
+    if(running) return;
+    running=true;
+    if(btn) btn.disabled=true;
+    log.textContent='初期化を開始しました。';
+    try{
+      if('serviceWorker' in navigator){
+        var regs=await navigator.serviceWorker.getRegistrations();
+        say('Service Worker: '+regs.length+'件');
+        await Promise.all(regs.map(function(r){ return r.unregister(); }));
+        say('Service Worker解除完了');
+      }else{
+        say('Service Worker未対応');
+      }
+      if('caches' in window){
+        var names=await caches.keys();
+        say('Cache Storage: '+names.length+'件');
+        await Promise.all(names.map(function(n){ return caches.delete(n); }));
+        say('Cache削除完了');
+      }else{
+        say('Cache Storage未対応');
+      }
+      say('RICE NAVIへ移動します。');
+      setTimeout(function(){ location.replace('./index.html?v=24&reset='+Date.now()); },600);
+    }catch(e){
+      say('エラー: '+(e&&e.message?e.message:e));
+      say('初期化できない場合は ./index.html?v=24 を直接開いてください。');
+      if(btn) btn.disabled=false;
+      running=false;
+    }
+  }
+  if(btn) btn.addEventListener('click', resetAndOpen);
+  window.addEventListener('load', function(){ setTimeout(resetAndOpen, 300); });
+})();
+</script>
+</body>
+</html>
