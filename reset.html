@@ -1,65 +1,50 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>RICE NAVI cache reset</title>
-  <style>
-    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:24px;background:#f7fbff;color:#102033}
-    .box{max-width:760px;margin:auto;background:#fff;padding:24px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-    button,a{display:inline-block;background:#0b6fd3;color:#fff;padding:12px 16px;border-radius:12px;text-decoration:none;border:0;font-weight:700;font-size:16px}
-    .ghost{background:#eef6ff;color:#0b4f96;margin-left:8px}
-    .log{white-space:pre-wrap;background:#eef6ff;padding:12px;border-radius:12px;margin-top:14px;line-height:1.7}
-    .note{color:#54616f;font-size:14px;line-height:1.7}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>RICE NAVI キャッシュ初期化 v22</title>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f8fc;color:#00224a;margin:0;padding:24px}.box{max-width:880px;margin:auto;background:#fff;border-radius:22px;padding:28px;box-shadow:0 8px 28px rgba(20,80,140,.08)}button,.btn{background:#0b6fd3;color:white;border:0;border-radius:14px;padding:14px 20px;font-weight:700;font-size:16px;text-decoration:none;display:inline-block}.log{background:#eaf4ff;border-radius:14px;padding:14px;margin-top:16px;white-space:pre-wrap}.ghost{background:#eef5ff;color:#0b4f9f}.row{display:flex;gap:12px;flex-wrap:wrap}
+</style>
 </head>
 <body>
-  <div class="box">
-    <h1>RICE NAVI キャッシュ初期化</h1>
-    <p>古い画面が残る場合、このページでService Workerとブラウザキャッシュを解除します。</p>
-    <button id="resetBtn" type="button">初期化してRICE NAVIを開く</button>
-    <a class="ghost" href="./index.html?v=20">初期化せず開く</a>
-    <div id="log" class="log">待機中</div>
-    <p class="note">この画面で止まる場合は、ボタンを押してください。それでも進まない場合は、通常URLの末尾に <b>?v=20</b> を付けて開いてください。</p>
-  </div>
-  <script>
-    (function(){
-      const log = document.getElementById('log');
-      const btn = document.getElementById('resetBtn');
-      function say(t){ log.textContent += '\n' + t; }
-      async function resetNow(){
-        log.textContent = '初期化開始';
-        btn.disabled = true;
-        try{
-          if('serviceWorker' in navigator){
-            const regs = await navigator.serviceWorker.getRegistrations();
-            say('Service Worker: ' + regs.length + '件');
-            for(const r of regs){ await r.unregister(); }
-          } else {
-            say('Service Workerなし');
-          }
-          if('caches' in window){
-            const names = await caches.keys();
-            say('Cache: ' + names.length + '件');
-            for(const n of names){ await caches.delete(n); }
-          } else {
-            say('Cache APIなし');
-          }
-          say('完了。RICE NAVIを開きます。');
-          setTimeout(function(){ location.replace('./index.html?v=20&reset=' + Date.now()); }, 600);
-        } catch(e){
-          say('エラー: ' + (e && e.message ? e.message : e));
-          say('手動でRICE NAVIを開いてください。');
-          btn.disabled = false;
-        }
-      }
-      btn.addEventListener('click', resetNow);
-      // 自動実行もする。ただし失敗時はボタンで再実行できる。
-      setTimeout(resetNow, 200);
-    })();
-  </script>
+<div class="box">
+<h1>RICE NAVI キャッシュ初期化 v22</h1>
+<p>古い画面が残る場合、このページでService Workerとブラウザキャッシュを解除します。</p>
+<div class="row"><button onclick="resetAndOpen()">初期化してRICE NAVIを開く</button><a class="btn ghost" href="./index.html?v=22">初期化せず開く</a></div>
+<div id="log" class="log">待機中</div>
+</div>
+<script>
+async function resetAndOpen(){
+ const log=document.getElementById('log');
+ function say(t){log.textContent += '
+' + t;}
+ log.textContent='初期化を開始しました。';
+ try{
+  if('serviceWorker' in navigator){
+    const regs=await navigator.serviceWorker.getRegistrations();
+    say('Service Worker: '+regs.length+'件');
+    await Promise.all(regs.map(r=>r.unregister()));
+    say('Service Worker解除完了');
+  }else{say('Service Worker未対応');}
+  if('caches' in window){
+    const names=await caches.keys();
+    say('Cache Storage: '+names.length+'件');
+    await Promise.all(names.map(n=>caches.delete(n)));
+    say('Cache削除完了');
+  }else{say('Cache Storage未対応');}
+  say('RICE NAVIへ移動します。');
+  setTimeout(()=>location.replace('./index.html?v=22&reset='+Date.now()),500);
+ }catch(e){
+  say('エラー: '+(e&&e.message?e.message:e));
+  say('下のURLを直接開いてください: ./index.html?v=22');
+ }
+}
+window.addEventListener('load',()=>setTimeout(resetAndOpen,300));
+</script>
 </body>
 </html>
