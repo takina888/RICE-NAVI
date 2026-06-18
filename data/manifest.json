@@ -1,0 +1,35 @@
+{
+  "app": "RICE NAVI",
+  "version": "v29_content_restore_linked",
+  "policy": "過去合意を反映。起動時は軽量、重いモジュールは画面を開いた時だけ読み込む。古いJSON・診断・一時ファイルは同梱しない。",
+  "core": {
+    "home": "data/core/home.json",
+    "reading": "data/core/reading.json",
+    "learning": "data/core/learning.json",
+    "check": "data/core/check.json"
+  },
+  "modules": {
+    "rice_varieties": "data/modules/rice_varieties.json",
+    "world_rice_rankings": "data/modules/world_rice_rankings.json",
+    "jp_reading_corner": "data/modules/jp_reading_corner.json"
+  },
+  "counts": {
+    "fortunes": 5,
+    "histories": 4,
+    "stories": 52,
+    "future": 50,
+    "terms": 30,
+    "meister": 100,
+    "learning_cards": 82,
+    "process_claims": 235,
+    "troubles": 18,
+    "rice_varieties": 250,
+    "world_rankings": 11,
+    "jp_reading": 237
+  },
+  "labels": {
+    "today_word": "今日の米言葉",
+    "world_rankings": "世界の米ランキング",
+    "jp_reading": "日本語限定読み物"
+  }
+}
