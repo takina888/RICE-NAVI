@@ -1,0 +1,16 @@
+{
+  "name": "RICE NAVI",
+  "short_name": "RICE NAVI",
+  "start_url": "./?v=78ui47",
+  "display": "standalone",
+  "background_color": "#f6fbff",
+  "theme_color": "#1677c8",
+  "icons": [
+    {
+      "src": "assets/app-icon/RICE_NAVI_RN_icon.png?v=78ui47",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "./"
+}
