@@ -1,0 +1,3 @@
+v78 migration m2 home illustration replacement
+base: v78 migration m1
+change: home-only soft lifestyle/culture SVG illustrations
