@@ -1,4 +1,0 @@
-RICE NAVI m70
-cache: 78m70
-version: v78.70_home_navigation_reaudit_m70
-status: public upload package
